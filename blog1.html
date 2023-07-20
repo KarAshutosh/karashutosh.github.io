@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog 1</title>
+    <title>Google OAuth Authentication Bypass</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -102,6 +102,7 @@
 
         <h3>Summary of the Bug:</h3>
         <p>The vulnerability revolves around the OAuth login with Google. After authenticating the Google account, users are redirected back to redacted.com. The issue arises when a user logs out from redacted.com without signing out from their Google account. Upon re-login through OAuth with Google, the user is automatically redirected to redacted.com without having to re-authenticate their Google account. This configuration oversight allows unauthorized access to the user's account.</p>
+    
     </div>
 
     <div class="blog-content">
@@ -116,7 +117,6 @@
         </br>   <strong>Second Login:</strong> The attacker initiates a new login attempt through OAuth with Google on the victim's computer.
         </br>        
         </br>   <strong>Unauthorized Access:</strong> Due to the misconfiguration, the attacker gains direct access to the victim's redacted.com account without having to re-authenticate their Google account.
-            
         </p>
     </div>
 
@@ -147,16 +147,16 @@
 
         <p>Here's a comprehensive guide on how to fix the issue:
         </br>
-        </br>    Properly Revoke Access Tokens/Codes:
+        </br>    <strong>Properly Revoke Access Tokens/Codes:</strong>
         </br>    Upon logging out from the redacted.com account, the application should also invalidate and revoke the previously obtained access tokens or codes from Google. This step ensures that even if an attacker attempts to reuse the previously acquired tokens, they would be rendered invalid and unable to authenticate the user.
         </br>    
-        </br>    Implement Explicit User Consent:
+        </br>    <strong>Implement Explicit User Consent:</strong>
         </br>    During the OAuth login process, users should be explicitly asked for their consent to use their Google account for authentication. This means that after selecting the Google login option, users should be redirected to the Google consent screen, where they can review the permissions and explicitly grant access to their account.
         </br>    
-        </br>    Implement Single Sign-On (SSO) Policies:
+        </br>    <strong>Implement Single Sign-On (SSO) Policies:</strong>
         </br>    Single Sign-On (SSO) is a technique that allows users to log in once and gain access to multiple applications without the need to re-enter credentials. However, in the case of the Google Sign-In, SSO should be carefully configured to ensure that users are prompted to re-authenticate with Google if they attempt to log in again without explicitly providing consent.
         </br>    
-        </br>    Implement Session Management:
+        </br>    <strong>Implement Session Management:</strong>
         </br>    Effective session management is crucial to prevent unauthorized access to user accounts. Sessions should be securely managed, and users should be automatically logged out after a certain period of inactivity. Additionally, users should have the option to manually log out from all devices and revoke access to active sessions from their account settings.
         </p>
 
@@ -172,7 +172,7 @@
     <a class="back-button" href="index.html">Back to Home</a>
 
     </div>
-    
+
     <footer>
         <div class="newsletter-section">
             <h2 class="newsletter-title">Sign up for Email Newsletter</h2>
