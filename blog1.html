@@ -7,52 +7,181 @@
     <title>Blog 1</title>
     <style>
         body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-        padding: 1rem;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 1rem;
+            margin: 0;
         }
 
         .blog-content {
-        max-width: 800px;
-        margin: 0 auto;
-        background-color: #fff;
-        border: 1px solid #ddd;
-        padding: 2rem;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
         }
 
         .back-button {
-        display: inline-block;
-        padding: 0.5rem 1rem;
-        background-color: #333;
-        color: #fff;
-        text-decoration: none;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
         }
 
         .back-button:hover {
-        background-color: #444;
+            background-color: #444;
+        }
+
+        /* New styles for the newsletter section */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 0.5rem 0;
+        }
+
+        .newsletter-section {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .newsletter-title {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            align-items: center;
+        }
+
+        .newsletter-input {
+            padding: 0.5rem;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .newsletter-submit {
+            padding: 0.5rem 1rem;
+            background-color: #ff6b6b;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .newsletter-submit:hover {
+            background-color: #ff4f4f;
         }
     </style>
 </head>
 
 <body>
     <div class="blog-content">
-        <h1>Blog 1</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua.</p>
+        <h1>Unraveling the Google Sign-In (OAuth) Authentication Bypass</h1>
+        <!-- <img src="image1.jpg" alt="Image 1" style="max-width: 100%;"> -->
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut maximus elit eget ultricies.</p>
+        <h3>Vulnerability Type:</h3>
+        <p>Misconfiguration, Authentication Bypass</p>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean facilisis sodales risus, at ultricies metus
-        varius eu.</p>
+        <h3>Sevearity:</h3>
+        <p>Medium</p>
+    
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis turpis a sapien facilisis dignissim.</p>
+    <div class="blog-content">
 
-        <a class="back-button" href="index.html">Back to Home</a>
+        <h3>Summary of the Bug:</h3>
+        <p>The vulnerability revolves around the OAuth login with Google. After authenticating the Google account, users are redirected back to redacted.com. The issue arises when a user logs out from redacted.com without signing out from their Google account. Upon re-login through OAuth with Google, the user is automatically redirected to redacted.com without having to re-authenticate their Google account. This configuration oversight allows unauthorized access to the user's account.</p>
     </div>
+
+    <div class="blog-content">
+        <h3>Exploiting the Vulnerability:</h3>
+
+        <p>Here's a detailed outline of the exploitation process:
+        </br>
+        </br>   <strong>Initial Login:</strong> The attacker logs in via OAuth using the Google option and completes the necessary authentication steps.
+        </br>        
+        </br>   <strong>Partial Logout:</strong> The attacker logs out from the redacted.com account but doesn't sign out from their Google account.
+        </br>        
+        </br>   <strong>Second Login:</strong> The attacker initiates a new login attempt through OAuth with Google on the victim's computer.
+        </br>        
+        </br>   <strong>Unauthorized Access:</strong> Due to the misconfiguration, the attacker gains direct access to the victim's redacted.com account without having to re-authenticate their Google account.
+            
+        </p>
+    </div>
+
+    <div class="blog-content">
+
+        <h3>Causes of the Vulnerability:</h3>
+
+        <p>The vulnerability stems from two main issues:
+        </br>
+        </br>    <strong>Access Token/Code Not Revoked:</strong> When a user logs in through Google, redacted.com acquires an access token or code that allows seamless authentication. However, during the logout process, the access token/code is not properly revoked, leaving a valid entry point for potential attackers.
+        </br>
+        </br>    <strong>Auto Login Misconfiguration:</strong> The misconfiguration allows the access token/code to be automatically utilized during the OAuth login process. As a result, the attacker gains unauthorized access without being prompted to re-authenticate through Google.
+        </p>
+
+    </div>
+    
+    <div class="blog-content">
+
+        <h3>Severity Assessment:</h3>
+
+        <p>The severity of this bug has been reduced to some extent as it requires physical access to the victim's device. This means that the attack scenario involves the victim logging into their redacted.com account via Google on a public computer, leaving their session active, and walking away. In such a case, anyone with access to the victim's computer can exploit the vulnerability and gain unauthorized access to their redacted.com account through Google OAuth.</p>
+        
+    </div>  
+
+    <div class="blog-content">
+
+        <h3>Patching</h3>
+
+        <p>Here's a comprehensive guide on how to fix the issue:
+        </br>
+        </br>    Properly Revoke Access Tokens/Codes:
+        </br>    Upon logging out from the redacted.com account, the application should also invalidate and revoke the previously obtained access tokens or codes from Google. This step ensures that even if an attacker attempts to reuse the previously acquired tokens, they would be rendered invalid and unable to authenticate the user.
+        </br>    
+        </br>    Implement Explicit User Consent:
+        </br>    During the OAuth login process, users should be explicitly asked for their consent to use their Google account for authentication. This means that after selecting the Google login option, users should be redirected to the Google consent screen, where they can review the permissions and explicitly grant access to their account.
+        </br>    
+        </br>    Implement Single Sign-On (SSO) Policies:
+        </br>    Single Sign-On (SSO) is a technique that allows users to log in once and gain access to multiple applications without the need to re-enter credentials. However, in the case of the Google Sign-In, SSO should be carefully configured to ensure that users are prompted to re-authenticate with Google if they attempt to log in again without explicitly providing consent.
+        </br>    
+        </br>    Implement Session Management:
+        </br>    Effective session management is crucial to prevent unauthorized access to user accounts. Sessions should be securely managed, and users should be automatically logged out after a certain period of inactivity. Additionally, users should have the option to manually log out from all devices and revoke access to active sessions from their account settings.
+        </p>
+
+    </div>  
+
+    <div class="blog-content">
+
+        <p>Link to original source <a href = "https://infosecwriteups.com/bypass-authentication-1bfab09332fe" targer="_blank">here</a></p>
+    
+        
+    </div>
+    
+    <a class="back-button" href="index.html">Back to Home</a>
+
+    </div>
+    
+    <footer>
+        <div class="newsletter-section">
+            <h2 class="newsletter-title">Sign up for Email Newsletter</h2>
+            <!-- <form class="newsletter-form" action="subscribe.php" method="post"> -->
+                <input type="email" class="newsletter-input" name="email" placeholder="Enter your email" required>
+                <a href = "https://docs.google.com/forms/d/e/1FAIpQLScHwdIvZLfy7nrz9kyudWU41dSUgKQhNj1vf40TUjLGa-eE1A/viewform?usp=sf_link" target="_blank"><button type="submit" class="newsletter-submit">Subscribe</button></a>
+            <!-- </form> -->
+        </div>
+    </footer>
 </body>
 
 </html>
