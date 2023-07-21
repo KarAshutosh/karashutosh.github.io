@@ -89,11 +89,11 @@
 <body>
     <div class="blog-content">
 
-        <h1>Unraveling the Google Sign-In (OAuth) Authentication Bypass</h1>
+        <h1>How Being Good at Googling Make Him Money - Google Dorking</h1>
         <!-- <img src="image1.jpg" alt="Image 1" style="max-width: 100%;"> -->
 
         <h3>Vulnerability Type:</h3>
-        <p>Misconfiguration, Authentication Bypass</p>
+        <p>Improper Authorization, Information Disclosure</p>
 
         <h3>Sevearity:</h3>
         <p>Medium</p>
@@ -110,14 +110,18 @@
             <h3>Exploiting the Vulnerability:</h3>
 
             <p>Here's a detailed outline of the exploitation process:
-            </br>
-            </br>   <strong>1) Initial Login:</strong> The attacker logs in via OAuth using the Google option and completes the necessary authentication steps.
-            </br>        
-            </br>   <strong>2) Partial Logout:</strong> The attacker logs out from the redacted.com account but doesn't sign out from their Google account.
-            </br>        
-            </br>   <strong>3) Second Login:</strong> The attacker initiates a new login attempt through OAuth with Google on the victim's computer.
-            </br>        
-            </br>   <strong>4) Unauthorized Access:</strong> Due to the misconfiguration, the attacker gains direct access to the victim's redacted.com account without having to re-authenticate their Google account.
+            
+                </br>
+                </br>    1) The individual went to Google and entered various Google Dorks from their Github repository.
+                </br>
+                </br>    2) They utilized the dork "intitle: 'Welcome to Grafana'" and successfully discovered a Grafana login page.
+                </br>
+                </br>    3) A swift review of the Grafana documentation allowed them to ascertain that the default username and password for the Grafana instance are both 'admin.'
+                </br>
+                </br>    4) With this knowledge, they proceeded to enter the default credentials into the login page, thereby gaining access to the Grafana instance.
+                </br>
+                </br>    5) Unable to replicate any of the known Grafana vulnerabilities listed on "https://www.cvedetails.com/vulnerability-list/vendor_id-18548/product_id-47055/Grafana-Grafana.html," the individual chose to report the weak 'admin' login. Despite its seemingly minor nature, the security team rewarded them with a three-figure sum as a bug bounty.
+            
             </p>
         </div>
 
@@ -125,12 +129,7 @@
 
             <h3>Causes of the Vulnerability:</h3>
 
-            <p>The vulnerability stems from two main issues:
-            </br>
-            </br>    <strong>Access Token/Code Not Revoked:</strong> When a user logs in through Google, redacted.com acquires an access token or code that allows seamless authentication. However, during the logout process, the access token/code is not properly revoked, leaving a valid entry point for potential attackers.
-            </br>
-            </br>    <strong>Auto Login Misconfiguration:</strong> The misconfiguration allows the access token/code to be automatically utilized during the OAuth login process. As a result, the attacker gains unauthorized access without being prompted to re-authenticate through Google.
-            </p>
+            <p>This vulnerability was caused due to default credentials being used as mentioned previously. It's discovery may have been prevented by restrictions in robots.txt file</p>
 
         </div>
         
@@ -138,7 +137,7 @@
 
             <h3>Severity Assessment:</h3>
 
-            <p>The severity of this bug has been reduced to some extent as it requires physical access to the victim's device. This means that the attack scenario involves the victim logging into their redacted.com account via Google on a public computer, leaving their session active, and walking away. In such a case, anyone with access to the victim's computer can exploit the vulnerability and gain unauthorized access to their redacted.com account through Google OAuth.</p>
+            <p>The security implications of this issue are significant. Grafana is often used to monitor crucial systems. If an attacker were to gain access, they would be able to monitor the system’s performance, track user activity, and potentially manipulate the data. Unsecured Grafana instances could potentially lead to significant data breaches.</p>
             
         </div>  
 
@@ -146,20 +145,7 @@
 
             <h3>Patching</h3>
 
-            <p>Here's a comprehensive guide on how to fix the issue:
-            </br>
-            </br>    <strong>Properly Revoke Access Tokens/Codes:</strong>
-            </br>    Upon logging out from the redacted.com account, the application should also invalidate and revoke the previously obtained access tokens or codes from Google. This step ensures that even if an attacker attempts to reuse the previously acquired tokens, they would be rendered invalid and unable to authenticate the user.
-            </br>    
-            </br>    <strong>Implement Explicit User Consent:</strong>
-            </br>    During the OAuth login process, users should be explicitly asked for their consent to use their Google account for authentication. This means that after selecting the Google login option, users should be redirected to the Google consent screen, where they can review the permissions and explicitly grant access to their account.
-            </br>    
-            </br>    <strong>Implement Single Sign-On (SSO) Policies:</strong>
-            </br>    Single Sign-On (SSO) is a technique that allows users to log in once and gain access to multiple applications without the need to re-enter credentials. However, in the case of the Google Sign-In, SSO should be carefully configured to ensure that users are prompted to re-authenticate with Google if they attempt to log in again without explicitly providing consent.
-            </br>    
-            </br>    <strong>Implement Session Management:</strong>
-            </br>    Effective session management is crucial to prevent unauthorized access to user accounts. Sessions should be securely managed, and users should be automatically logged out after a certain period of inactivity. Additionally, users should have the option to manually log out from all devices and revoke access to active sessions from their account settings.
-            </p>
+            <p>Change the default password</p>
 
         </div>  
 
