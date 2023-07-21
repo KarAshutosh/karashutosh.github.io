@@ -88,6 +88,7 @@
 
 <body>
     <div class="blog-content">
+
         <h1>Unraveling the Google Sign-In (OAuth) Authentication Bypass</h1>
         <!-- <img src="image1.jpg" alt="Image 1" style="max-width: 100%;"> -->
 
@@ -98,69 +99,69 @@
         <p>Medium</p>
     
 
-    <div class="blog-content">
+        <div class="blog-content">
 
-        <h3>Summary of the Bug:</h3>
-        <p>The vulnerability revolves around the OAuth login with Google. After authenticating the Google account, users are redirected back to redacted.com. The issue arises when a user logs out from redacted.com without signing out from their Google account. Upon re-login through OAuth with Google, the user is automatically redirected to redacted.com without having to re-authenticate their Google account. This configuration oversight allows unauthorized access to the user's account.</p>
-    
-    </div>
-
-    <div class="blog-content">
-        <h3>Exploiting the Vulnerability:</h3>
-
-        <p>Here's a detailed outline of the exploitation process:
-        </br>
-        </br>   <strong>1%29 Initial Login:</strong> The attacker logs in via OAuth using the Google option and completes the necessary authentication steps.
-        </br>        
-        </br>   <strong>2%29 Partial Logout:</strong> The attacker logs out from the redacted.com account but doesn't sign out from their Google account.
-        </br>        
-        </br>   <strong>3%29 Second Login:</strong> The attacker initiates a new login attempt through OAuth with Google on the victim's computer.
-        </br>        
-        </br>   <strong>4%29 Unauthorized Access:</strong> Due to the misconfiguration, the attacker gains direct access to the victim's redacted.com account without having to re-authenticate their Google account.
-        </p>
-    </div>
-
-    <div class="blog-content">
-
-        <h3>Causes of the Vulnerability:</h3>
-
-        <p>The vulnerability stems from two main issues:
-        </br>
-        </br>    <strong>Access Token/Code Not Revoked:</strong> When a user logs in through Google, redacted.com acquires an access token or code that allows seamless authentication. However, during the logout process, the access token/code is not properly revoked, leaving a valid entry point for potential attackers.
-        </br>
-        </br>    <strong>Auto Login Misconfiguration:</strong> The misconfiguration allows the access token/code to be automatically utilized during the OAuth login process. As a result, the attacker gains unauthorized access without being prompted to re-authenticate through Google.
-        </p>
-
-    </div>
-    
-    <div class="blog-content">
-
-        <h3>Severity Assessment:</h3>
-
-        <p>The severity of this bug has been reduced to some extent as it requires physical access to the victim's device. This means that the attack scenario involves the victim logging into their redacted.com account via Google on a public computer, leaving their session active, and walking away. In such a case, anyone with access to the victim's computer can exploit the vulnerability and gain unauthorized access to their redacted.com account through Google OAuth.</p>
+            <h3>Summary of the Bug:</h3>
+            <p>The vulnerability revolves around the OAuth login with Google. After authenticating the Google account, users are redirected back to redacted.com. The issue arises when a user logs out from redacted.com without signing out from their Google account. Upon re-login through OAuth with Google, the user is automatically redirected to redacted.com without having to re-authenticate their Google account. This configuration oversight allows unauthorized access to the user's account.</p>
         
-    </div>  
+        </div>
 
-    <div class="blog-content">
+        <div class="blog-content">
+            <h3>Exploiting the Vulnerability:</h3>
 
-        <h3>Patching</h3>
+            <p>Here's a detailed outline of the exploitation process:
+            </br>
+            </br>   <strong>1) Initial Login:</strong> The attacker logs in via OAuth using the Google option and completes the necessary authentication steps.
+            </br>        
+            </br>   <strong>2) Partial Logout:</strong> The attacker logs out from the redacted.com account but doesn't sign out from their Google account.
+            </br>        
+            </br>   <strong>3) Second Login:</strong> The attacker initiates a new login attempt through OAuth with Google on the victim's computer.
+            </br>        
+            </br>   <strong>4) Unauthorized Access:</strong> Due to the misconfiguration, the attacker gains direct access to the victim's redacted.com account without having to re-authenticate their Google account.
+            </p>
+        </div>
 
-        <p>Here's a comprehensive guide on how to fix the issue:
-        </br>
-        </br>    <strong>Properly Revoke Access Tokens/Codes:</strong>
-        </br>    Upon logging out from the redacted.com account, the application should also invalidate and revoke the previously obtained access tokens or codes from Google. This step ensures that even if an attacker attempts to reuse the previously acquired tokens, they would be rendered invalid and unable to authenticate the user.
-        </br>    
-        </br>    <strong>Implement Explicit User Consent:</strong>
-        </br>    During the OAuth login process, users should be explicitly asked for their consent to use their Google account for authentication. This means that after selecting the Google login option, users should be redirected to the Google consent screen, where they can review the permissions and explicitly grant access to their account.
-        </br>    
-        </br>    <strong>Implement Single Sign-On (SSO) Policies:</strong>
-        </br>    Single Sign-On (SSO) is a technique that allows users to log in once and gain access to multiple applications without the need to re-enter credentials. However, in the case of the Google Sign-In, SSO should be carefully configured to ensure that users are prompted to re-authenticate with Google if they attempt to log in again without explicitly providing consent.
-        </br>    
-        </br>    <strong>Implement Session Management:</strong>
-        </br>    Effective session management is crucial to prevent unauthorized access to user accounts. Sessions should be securely managed, and users should be automatically logged out after a certain period of inactivity. Additionally, users should have the option to manually log out from all devices and revoke access to active sessions from their account settings.
-        </p>
+        <div class="blog-content">
 
-    </div>  
+            <h3>Causes of the Vulnerability:</h3>
+
+            <p>The vulnerability stems from two main issues:
+            </br>
+            </br>    <strong>Access Token/Code Not Revoked:</strong> When a user logs in through Google, redacted.com acquires an access token or code that allows seamless authentication. However, during the logout process, the access token/code is not properly revoked, leaving a valid entry point for potential attackers.
+            </br>
+            </br>    <strong>Auto Login Misconfiguration:</strong> The misconfiguration allows the access token/code to be automatically utilized during the OAuth login process. As a result, the attacker gains unauthorized access without being prompted to re-authenticate through Google.
+            </p>
+
+        </div>
+        
+        <div class="blog-content">
+
+            <h3>Severity Assessment:</h3>
+
+            <p>The severity of this bug has been reduced to some extent as it requires physical access to the victim's device. This means that the attack scenario involves the victim logging into their redacted.com account via Google on a public computer, leaving their session active, and walking away. In such a case, anyone with access to the victim's computer can exploit the vulnerability and gain unauthorized access to their redacted.com account through Google OAuth.</p>
+            
+        </div>  
+
+        <div class="blog-content">
+
+            <h3>Patching</h3>
+
+            <p>Here's a comprehensive guide on how to fix the issue:
+            </br>
+            </br>    <strong>Properly Revoke Access Tokens/Codes:</strong>
+            </br>    Upon logging out from the redacted.com account, the application should also invalidate and revoke the previously obtained access tokens or codes from Google. This step ensures that even if an attacker attempts to reuse the previously acquired tokens, they would be rendered invalid and unable to authenticate the user.
+            </br>    
+            </br>    <strong>Implement Explicit User Consent:</strong>
+            </br>    During the OAuth login process, users should be explicitly asked for their consent to use their Google account for authentication. This means that after selecting the Google login option, users should be redirected to the Google consent screen, where they can review the permissions and explicitly grant access to their account.
+            </br>    
+            </br>    <strong>Implement Single Sign-On (SSO) Policies:</strong>
+            </br>    Single Sign-On (SSO) is a technique that allows users to log in once and gain access to multiple applications without the need to re-enter credentials. However, in the case of the Google Sign-In, SSO should be carefully configured to ensure that users are prompted to re-authenticate with Google if they attempt to log in again without explicitly providing consent.
+            </br>    
+            </br>    <strong>Implement Session Management:</strong>
+            </br>    Effective session management is crucial to prevent unauthorized access to user accounts. Sessions should be securely managed, and users should be automatically logged out after a certain period of inactivity. Additionally, users should have the option to manually log out from all devices and revoke access to active sessions from their account settings.
+            </p>
+
+        </div>  
 
     <p>Link to original source <a href = "https://infosecwriteups.com/bypass-authentication-1bfab09332fe" targer="_blank">here</a></p>
     
@@ -169,11 +170,12 @@
     </div>
 
     <footer>
+
         <div class="newsletter-section">
-            <h2 class="newsletter-title">Sign up for Email Newsletter</h2>
+            <h2 class="newsletter-title">Become A Better Developer</h2>
             <!-- <form class="newsletter-form" action="subscribe.php" method="post"> -->
-                <input type="email" class="newsletter-input" name="email" placeholder="Enter your email" required>
-                <a href = "https://docs.google.com/forms/d/e/1FAIpQLScHwdIvZLfy7nrz9kyudWU41dSUgKQhNj1vf40TUjLGa-eE1A/viewform?usp=sf_link" target="_blank"><button type="submit" class="newsletter-submit">Subscribe</button></a>
+                <input type="email" class="newsletter-input" name="email" placeholder="Email Newsletter" required>
+                <a href = "https://docs.google.com/forms/d/e/1FAIpQLScHwdIvZLfy7nrz9kyudWU41dSUgKQhNj1vf40TUjLGa-eE1A/viewform?usp=sf_link" target="_blank"><button type="submit" class="newsletter-submit">Subscribe Now</button></a>
             <!-- </form> -->
         </div>
     </footer>
