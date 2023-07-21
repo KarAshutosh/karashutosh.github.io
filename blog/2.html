@@ -49,26 +49,22 @@
         .newsletter-section {
             max-width: 800px;
             margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            text-align: center;
             padding: 1rem;
         }
 
         .newsletter-title {
             font-size: 1.5rem;
-            margin-right: 1rem;
-        }
-
-        .newsletter-form {
-            display: flex;
-            align-items: center;
+            margin-bottom: 1rem;
         }
 
         .newsletter-input {
+            width: 100%;
+            max-width: 300px;
             padding: 0.5rem;
             border: none;
             border-radius: 4px;
+            margin-right: 1rem;
         }
 
         .newsletter-submit {
@@ -89,7 +85,22 @@
                 padding: 1rem;
             }
 
-            
+            header {
+                padding: 0.5rem;
+                font-size: 1.2rem;
+            }
+
+            .newsletter-title {
+                font-size: 1.2rem;
+            }
+
+            .newsletter-input,
+            .newsletter-submit {
+                width: 100%;
+                max-width: none;
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+            }
         }
     </style>
 </head>
@@ -175,12 +186,13 @@
     <footer>
 
         <div class="newsletter-section">
-            <h2 class="newsletter-title">Enhance Your Developer Skills With Cyber Security</h2>
-            <!-- <form class="newsletter-form" action="subscribe.php" method="post"> -->
+            <h2 class="newsletter-title">Enhance Your Developer Skills With Cyber Security</h2> 
+        <!-- <form class="newsletter-form" action="subscribe.php" method="post"> -->
                 <input type="email" class="newsletter-input" name="email" placeholder="Email Newsletter" required>
                 <a href = "https://docs.google.com/forms/d/e/1FAIpQLScHwdIvZLfy7nrz9kyudWU41dSUgKQhNj1vf40TUjLGa-eE1A/viewform?usp=sf_link" target="_blank"><button type="submit" class="newsletter-submit">Subscribe Now</button></a>
             <!-- </form> -->
         </div>
+        
     </footer>
 </body>
 
