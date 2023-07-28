@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google OAuth Authentication Bypass</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 1rem;
+            margin: 0;
+        }
+
+        .blog-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background-color: #444;
+        }
+
+        /* New styles for the newsletter section */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 0.5rem 0;
+        }
+
+        .newsletter-section {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .newsletter-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-input {
+            width: 90%;
+            max-width: 300px;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 4px;
+            margin-right: 1rem;
+        }
+
+        .newsletter-submit {
+            padding: 0.5rem 1rem;
+            background-color: #ff6b6b;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .newsletter-submit:hover {
+            background-color: #ff4f4f;
+        }
+
+        @media screen and (max-width: 768px) {
+            .blog-content {
+                padding: 1rem;
+            }
+
+            header {
+                padding: 0.5rem;
+                font-size: 1.2rem;
+            }
+
+            .newsletter-title {
+                font-size: 1.2rem;
+            }
+
+            .newsletter-input,
+            .newsletter-submit {
+                width: 90%;
+                max-width: none;
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="blog-content">
+
+        <h1>How a Smartphone Camera Can Hack Smartcard Reader of Your Office</h1>
+        <!-- <img src="image1.jpg" alt="Image 1" style="max-width: 100%;"> -->
+
+        <h3>Vulnerability Type:</h3>
+        <p>Improper Authorization, Information Disclosure</p>
+
+        <h3>Sevearity:</h3>
+        <p>Medium</p>
+    
+
+        <div class="blog-content">
+
+            <h3>Summary of the Bug:</h3>
+            <p>The author shared their successful experience in bug bounty hunting by discovering an Information Disclosure vulnerability in Grafana. They used Google Dorks to find instances of Grafana, and by exploiting the default credentials, they gained unauthorized access.</p>
+            
+            <p><strong>Google Dorking</strong></p>
+            <p>Google Dorking is a technique that utilizes advanced search operators to extract specific data from Google's vast index. In the realm of cybersecurity, it is commonly employed to locate misconfigurations and exposed information that should not be publicly accessible. By crafting specialized search queries, security researchers and hackers can identify potential vulnerabilities and sensitive data leaks on websites and servers, highlighting the need for proper security measures and vigilance in protecting online assets. 
+                </br>For more information, click <a href = "https://medium.com/bugbountywriteup/google-dork-the-best-one-and-how-do-you-find-bugs-with-it-689c69804b81" target="_blank">here</a>.
+            </p>
+
+            <p><strong>Grafana</strong></p>
+            <p>Grafana is an open-source monitoring and observability platform widely used in IT operations, DevOps, and IoT. It allows users to visualize, explore, and analyze data from various sources, such as databases and web services, through dynamic and informative dashboards. Grafana's flexibility and customizability make it a powerful tool for real-time monitoring and gaining insights into system performance, behavior, and anomalies, enabling users to effectively manage and optimize large-scale data environments.
+                </br>For more information, click <a href = "https://grafana.com/" target="_blank">here</a>.
+            </p>
+        </div>
+
+        <div class="blog-content">
+            <h3>Exploiting the Vulnerability:</h3>
+
+            <p>Here's a detailed outline of the exploitation process:
+            
+                </br>
+                </br>    1) The individual went to Google and entered various Google Dorks from their Github repository.
+                </br>
+                </br>    2) They utilized the dork "intitle: 'Welcome to Grafana'" and successfully discovered a Grafana login page.
+                </br>
+                </br>    3) A swift review of the Grafana documentation allowed them to ascertain that the default username and password for the Grafana instance are both 'admin.'
+                </br>
+                </br>    4) With this knowledge, they proceeded to enter the default credentials into the login page, thereby gaining access to the Grafana instance.
+                </br>
+                </br>    5) Unable to replicate any of the known Grafana vulnerabilities listed on "https://www.cvedetails.com/vulnerability-list/vendor_id-18548/product_id-47055/Grafana-Grafana.html," the individual chose to report the weak 'admin' login. Despite its seemingly minor nature, the security team rewarded them with a three-figure sum as a bug bounty.
+            
+            </p>
+        </div>
+
+        <div class="blog-content">
+
+            <h3>Causes of the Vulnerability:</h3>
+
+            <p>This vulnerability was caused due to default credentials being used as mentioned previously. It's discovery may have been prevented by restrictions in robots.txt file</p>
+
+        </div>
+        
+        <div class="blog-content">
+
+            <h3>Severity Assessment:</h3>
+
+            <p>The security implications of this issue are significant. Grafana is often used to monitor crucial systems. If an attacker were to gain access, they would be able to monitor the system’s performance, track user activity, and potentially manipulate the data. Unsecured Grafana instances could potentially lead to significant data breaches.</p>
+            
+        </div>  
+
+        <div class="blog-content">
+
+            <h3>Patching</h3>
+
+            <p>Change the password from default</p>
+
+        </div>  
+
+    <p>Credite: @proviesec. Link to original source <a href = "https://infosecwriteups.com/bypass-authentication-1bfab09332fe" targer="_blank">here</a></p>
+    
+    <a class="back-button" href="https://karashutosh.github.io/">Back to Home</a>
+
+    </div>
+
+    <footer>
+
+        <div class="newsletter-section">
+            <h2 class="newsletter-title">Enhance Your Development Skills With Cyber Security</h2> 
+        <!-- <form class="newsletter-form" action="subscribe.php" method="post"> -->
+                <input type="email" class="newsletter-input" name="email" placeholder="Email Newsletter" required>
+                <a href = "https://docs.google.com/forms/d/e/1FAIpQLScHwdIvZLfy7nrz9kyudWU41dSUgKQhNj1vf40TUjLGa-eE1A/viewform?usp=sf_link" target="_blank"><button type="submit" class="newsletter-submit">Count me in!</button></a>
+            <!-- </form> -->
+        </div>
+        
+    </footer>
+</body>
+
+</html>
