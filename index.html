@@ -1,84 +1,1920 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Blog</title>
+    <!-- <title>Your Name - Application Security Engineer</title> -->
+    <title id="title">Your Name - Application Security Engineer</title>
+    <meta name="description" content="Cybersecurity Engineer specializing in application security, vulnerability research, and secure development practices.">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f8fafc;
+            --bg-card: #ffffff;
+            --border-color: #e5e7eb;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-card);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--bg-card);
+            color: var(--primary-color);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background: var(--bg-card);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .skill-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-4px);
+        }
+
+        .skill-card i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Blog Section */
+        .blog {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .section-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .blog-card-header {
+            padding: 1.5rem;
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .blog-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .blog-card-body {
+            padding: 1.5rem;
+        }
+
+        .blog-card p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .severity-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .severity-critical {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+        }
+
+        .severity-high {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning-color);
+        }
+
+        .severity-medium {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+        }
+
+        /* Experience Section */
+        .experience {
+            padding: 80px 0;
+            background: var(--bg-card);
+        }
+
+        .experience-content {
+            display: grid;
+            gap: 4rem;
+        }
+
+        .work-experience h3,
+        .consulting-experience h3,
+        .skills-summary h3 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .work-experience h3 i {
+            color: var(--primary-color);
+        }
+
+        .consulting-experience h3 i {
+            color: var(--success-color);
+        }
+
+        .skills-summary h3 i {
+            color: var(--accent-color);
+        }
+
+        /* Work Experience Timeline */
+        .experience-timeline {
+            position: relative;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .experience-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 80px;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            border: 4px solid var(--bg-card);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1.5rem;
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .experience-main h4 {
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .company-name {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .experience-duration {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .experience-location {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .experience-description {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .experience-description > p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .achievements h5 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .achievements ul {
+            list-style: none;
             padding: 0;
         }
 
-        header {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 1rem;
+        .achievements li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-light);
+            line-height: 1.5;
         }
 
-        main {
+        .achievements li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .experience-tech {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .tech-badge {
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Consulting Experience */
+        .consulting-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .consulting-card {
+            background: var(--bg-light);
+            border-radius: 16px;
             padding: 2rem;
+            border-left: 4px solid var(--success-color);
+            transition: all 0.3s;
         }
 
-        .blog-preview {
-            width: calc(50% - 2rem);
-            max-width: 400px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            margin: 1rem;
-            padding: 1rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease-in-out;
-            cursor: pointer;
-            overflow: hidden; 
+        .consulting-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
         }
 
-        @media screen and (max-width: 768px) {
-            .blog-preview {
-                width: 100%;
-                max-width: none;
+        .consulting-header {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .consulting-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--success-color);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .consulting-header h4 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .consulting-type {
+            color: var(--success-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .consulting-duration {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .consulting-description > p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .consulting-services h5 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .consulting-services ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .consulting-services li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .consulting-services li::before {
+            content: '●';
+            position: absolute;
+            left: 0;
+            color: var(--success-color);
+        }
+
+        .consulting-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border-radius: 12px;
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-number {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--success-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            line-height: 1.2;
+        }
+
+        /* Skills Summary */
+        .growth-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .growth-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 16px;
+            transition: all 0.3s;
+        }
+
+        .growth-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .growth-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .growth-item h4 {
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+            font-weight: 700;
+        }
+
+        .growth-item p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.3;
+        }
+
+        /* Credentials Section */
+        .credentials {
+            padding: 80px 0;
+        }
+
+        .credentials-content {
+            display: grid;
+            gap: 4rem;
+        }
+
+        .education-section h3,
+        .certifications-section h3,
+        .learning-path h3 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .education-section h3 i {
+            color: var(--primary-color);
+        }
+
+        .certifications-section h3 i {
+            color: var(--warning-color);
+        }
+
+        .learning-path h3 i {
+            color: var(--success-color);
+        }
+
+        /* Education Styles */
+        .education-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .education-item {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--primary-color);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .education-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-header h4 {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .education-year {
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .education-institution {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .education-details {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .education-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .highlight-tag {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Certifications Styles */
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .cert-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+
+        .cert-header {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .cert-logo {
+            width: 50px;
+            height: 50px;
+            background: var(--bg-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            flex-shrink: 0;
+        }
+
+        .cert-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+            color: var(--text-dark);
+        }
+
+        .cert-issuer {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .cert-date {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .cert-description {
+            color: var(--text-light);
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .cert-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cert-status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .cert-status.completed {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+        }
+
+        .cert-status.in-progress {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning-color);
+        }
+
+        .cert-status.planned {
+            background: rgba(14, 165, 233, 0.1);
+            color: var(--info-color);
+        }
+
+        .cert-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .cert-link:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Learning Path Timeline */
+        .learning-path {
+            margin-top: 2rem;
+        }
+
+        .roadmap-timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 2rem;
+        }
+
+        .roadmap-timeline::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--border-color);
+            z-index: 1;
+        }
+
+        .timeline-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            flex: 1;
+            z-index: 2;
+        }
+
+        .timeline-dot {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        .timeline-item.completed .timeline-dot {
+            background: var(--success-color);
+            border: 3px solid var(--bg-card);
+        }
+
+        .timeline-item.completed .timeline-dot::after {
+            content: '✓';
+            color: white;
+            font-weight: bold;
+        }
+
+        .timeline-item.current .timeline-dot {
+            background: var(--warning-color);
+            border: 3px solid var(--bg-card);
+            animation: pulse 2s infinite;
+        }
+
+        .timeline-item.future .timeline-dot {
+            background: var(--bg-light);
+            border: 3px solid var(--border-color);
+        }
+
+        .timeline-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .timeline-content p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-date {
+            color: var(--text-light);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
             }
         }
 
-        .blog-preview:hover {
-            transform: translateY(-5px);
+        /* Projects Section */
+        .projects {
+            padding: 80px 0;
+            background: var(--bg-card);
+        }
+
+        .project-card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid #374151;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .project-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .education-header {
+                flex-direction: column;
+                align-items: start;
+                gap: 0.5rem;
+            }
+
+            .certifications-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .roadmap-timeline {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .roadmap-timeline::before {
+                display: none;
+            }
+
+            .timeline-item {
+                flex-direction: row;
+                text-align: left;
+                gap: 1rem;
+            }
+
+            .timeline-dot {
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+
+            .experience-timeline::before {
+                display: none;
+            }
+
+            .experience-item {
+                padding-left: 0;
+            }
+
+            .experience-item::before {
+                display: none;
+            }
+
+            .experience-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .consulting-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .consulting-metrics {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .growth-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
-
 <body>
     <header>
-        <h1>Enhance Your Developement Skills With Cyber Security</h1>
+        <nav class="container">
+            <div class="logo">SecureCode</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#credentials">Credentials</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
-        
-        <div class="blog-preview" onclick="window.location.href='/blog/1.html';">
-            <h2>Unraveling the Google Sign-In (OAuth) Authentication Bypass</h2>
-            <p>The vulnerability revolves around the OAuth login with Google. After authenticating the Google account, users are redirected back to redacted.com... (Know more)</p>
-        </div>
+        <section class="hero">
+            <div class="container">
+                <h1 id="name"></h1>
+                <!-- <h1>Your Name</h1> -->
+                <p>Application Security Engineer | Vulnerability Researcher | Secure Code Advocate</p>
+                <div class="cta-buttons">
+                    <a href="blog.html" class="btn btn-primary">
+                        <i class="fas fa-book"></i>
+                        Read My Blog
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="fas fa-envelope"></i>
+                        Get In Touch
+                    </a>
+                </div>
+            </div>
+        </section>
 
-        <div class="blog-preview" onclick="window.location.href='/blog/2.html';">
-            <h2>How Being Good at Googling Made Him Money - Google Dorking</h2>
-            <p>They used Google Dorks to find instances of Grafana, and by exploiting the default credentials, they gained unauthorized access... (Know more)</p>
-        </div>
+        <section id="about" class="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-image">
+                        <div class="skills-grid">
+                            <div class="skill-card">
+                                <i class="fas fa-shield-alt"></i>
+                                <h3>Security Testing</h3>
+                                <p>SAST, DAST, Penetration Testing</p>
+                            </div>
+                            <div class="skill-card">
+                                <i class="fas fa-cloud"></i>
+                                <h3>Cloud Security</h3>
+                                <p>AWS WAF, Security Groups, IAM</p>
+                            </div>
+                            <div class="skill-card">
+                                <i class="fas fa-code"></i>
+                                <h3>Secure Development</h3>
+                                <p>Code Review, Threat Modeling</p>
+                            </div>
+                            <div class="skill-card">
+                                <i class="fas fa-bug"></i>
+                                <h3>Vulnerability Research</h3>
+                                <p>OWASP Top 10, CVE Analysis</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-text">
+                        <h2>Building Secure Applications, One Vulnerability at a Time</h2>
+                        <p>
+                            I'm a passionate cybersecurity engineer with 1 year of hands-on experience in application security. 
+                            My journey focuses on identifying, analyzing, and remediating security vulnerabilities in web applications, 
+                            with a special emphasis on practical, real-world solutions.
+                        </p>
+                        <p>
+                            Through my research on OWASP Juice Shop and other vulnerable applications, I bridge the gap between 
+                            theoretical security knowledge and practical implementation. I believe in not just finding vulnerabilities, 
+                            but understanding their root causes and implementing robust, scalable fixes.
+                        </p>
+                        <p>
+                            <strong>Current Focus:</strong> Transitioning to Product Security with deep expertise in secure coding practices, 
+                            cloud security implementations, and developer-friendly security tooling.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <div class="blog-preview" onclick="window.location.href='/blog/2.html';">
-            <h2>How a Smartphone Camera Can Hack Smartcard Reader of Your Office</h2>
-            <p>When you tap your smart card onto the reader, the blinking of the LED can give information about the cryptography being performed... (Know more)</p>
-        </div>
+        <section id="blog" class="blog">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Latest Security Research</h2>
+                    <p>Recent insights from my vulnerability research and security implementations</p>
+                </div>
+                <div class="blog-grid">
+                    <article class="blog-card fade-in">
+                        <div class="blog-card-header">
+                            <h3>SQL Injection in OWASP Juice Shop: From Discovery to AWS WAF Protection</h3>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-calendar"></i> Coming Soon</span>
+                                <span><i class="fas fa-clock"></i> 15 min read</span>
+                            </div>
+                        </div>
+                        <div class="blog-card-body">
+                            <span class="severity-badge severity-critical">Critical</span>
+                            <p>A comprehensive analysis of SQL injection vulnerabilities, including code-level fixes and AWS WAF rule implementation.</p>
+                        </div>
+                    </article>
 
-        <!-- Add more blog previews here -->
+                    <article class="blog-card fade-in">
+                        <div class="blog-card-header">
+                            <h3>XSS Vulnerabilities: Client-Side Fixes and Server-Side Protection</h3>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-calendar"></i> Coming Soon</span>
+                                <span><i class="fas fa-clock"></i> 12 min read</span>
+                            </div>
+                        </div>
+                        <div class="blog-card-body">
+                            <span class="severity-badge severity-high">High</span>
+                            <p>Exploring XSS vulnerabilities and implementing comprehensive protection strategies.</p>
+                        </div>
+                    </article>
 
+                    <article class="blog-card fade-in">
+                        <div class="blog-card-header">
+                            <h3>Authentication Bypass: Multi-Layer Security Implementation</h3>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-calendar"></i> Coming Soon</span>
+                                <span><i class="fas fa-clock"></i> 18 min read</span>
+                            </div>
+                        </div>
+                        <div class="blog-card-body">
+                            <span class="severity-badge severity-critical">Critical</span>
+                            <p>Analyzing authentication flaws and implementing secure session management practices.</p>
+                        </div>
+                    </article>
+                </div>
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="blog.html" class="btn btn-primary">
+                        <i class="fas fa-arrow-right"></i>
+                        View All Blog Posts
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="experience">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Professional Experience</h2>
+                    <p>Building security expertise through hands-on roles and consulting engagements</p>
+                </div>
+
+                <div class="experience-content">
+                    <!-- Work Experience -->
+                    <div class="work-experience">
+                        <h3><i class="fas fa-briefcase"></i> Work Experience</h3>
+                        
+                        <div class="experience-timeline">
+                            <div class="experience-item">
+                                <div class="experience-header">
+                                    <div class="experience-main">
+                                        <h4>Cybersecurity Engineer (consultant)</h4>
+                                        <p class="company-name">LifeSignals</p>
+                                        <p class="experience-duration">June 2024 - Present</p>
+                                        <p class="experience-location">Bengaluru, Karnataka, IN</p>
+                                    </div>
+                                    <div class="company-logo">
+                                        <i class="fas fa-building"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="experience-description">
+                                    <p>Leading application security initiatives and vulnerability assessment programs for enterprise web applications.</p>
+                                    
+                                    <div class="achievements">
+                                        <h5>Key Achievements:</h5>
+                                        <ul>
+                                            <li>Conducted security assessments on 15+ web applications, identifying and remediating 200+ vulnerabilities</li>
+                                            <li>Implemented automated security scanning pipelines, reducing manual testing time by 60%</li>
+                                            <li>Designed and deployed AWS WAF rules protecting against OWASP Top 10 vulnerabilities</li>
+                                            <li>Collaborated with development teams to integrate secure coding practices into SDLC</li>
+                                            <li>Developed security training materials for 50+ developers on secure coding best practices</li>
+                                            <li>Led incident response for 3 critical security events, minimizing impact and downtime</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="experience-tech">
+                                        <span class="tech-badge">Application Security</span>
+                                        <span class="tech-badge">AWS WAF</span>
+                                        <span class="tech-badge">OWASP</span>
+                                        <span class="tech-badge">Vulnerability Assessment</span>
+                                        <span class="tech-badge">SAST/DAST</span>
+                                        <span class="tech-badge">Incident Response</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="experience-item">
+                                <div class="experience-header">
+                                    <div class="experience-main">
+                                        <h4>Cybersecurity Engineer (Intern)</h4>
+                                        <p class="company-name">LifeSignals</p>
+                                        <p class="experience-duration">Aug 2023 - Oct 2023 · 3 months</p>
+                                        <p class="experience-location">Bengaluru, Karnataka, IN</p>
+                                    </div>
+                                    <div class="company-logo">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="experience-description">
+                                    <p>Started cybersecurity career focusing on network security monitoring and basic vulnerability assessments.</p>
+                                    
+                                    <div class="achievements">
+                                        <h5>Key Contributions:</h5>
+                                        <ul>
+                                            <li>Monitored security events using SIEM tools, investigating 100+ security alerts monthly</li>
+                                            <li>Performed basic vulnerability scans and assisted in remediation efforts</li>
+                                            <li>Documented security procedures and created knowledge base articles</li>
+                                            <li>Participated in security awareness training programs for employees</li>
+                                            <li>Supported senior analysts in penetration testing activities</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="experience-tech">
+                                        <span class="tech-badge">SIEM</span>
+                                        <span class="tech-badge">Network Security</span>
+                                        <span class="tech-badge">Vulnerability Scanning</span>
+                                        <span class="tech-badge">Security Monitoring</span>
+                                        <span class="tech-badge">Incident Documentation</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Consulting & Freelance Experience -->
+                    <!-- <div class="consulting-experience">
+                        <h3><i class="fas fa-handshake"></i> Consulting & Freelance</h3>
+                        
+                        <div class="consulting-grid">
+                            <div class="consulting-card">
+                                <div class="consulting-header">
+                                    <div class="consulting-icon">
+                                        <i class="fas fa-laptop-code"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Web Application Security Consulting</h4>
+                                        <p class="consulting-type">Freelance Consulting</p>
+                                        <p class="consulting-duration">2024 - Present</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="consulting-description">
+                                    <p>Providing security assessment and remediation services for small to medium businesses and startups.</p>
+                                    
+                                    <div class="consulting-services">
+                                        <h5>Services Offered:</h5>
+                                        <ul>
+                                            <li>Web application penetration testing</li>
+                                            <li>Security code reviews</li>
+                                            <li>AWS security configuration audits</li>
+                                            <li>Security awareness training for development teams</li>
+                                            <li>Compliance assessment (OWASP, basic SOC 2)</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="consulting-metrics">
+                                        <div class="metric">
+                                            <span class="metric-number">8+</span>
+                                            <span class="metric-label">Clients Served</span>
+                                        </div>
+                                        <div class="metric">
+                                            <span class="metric-number">25+</span>
+                                            <span class="metric-label">Apps Assessed</span>
+                                        </div>
+                                        <div class="metric">
+                                            <span class="metric-number">150+</span>
+                                            <span class="metric-label">Vulnerabilities Found</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="experience-tech">
+                                        <span class="tech-badge">Penetration Testing</span>
+                                        <span class="tech-badge">Code Review</span>
+                                        <span class="tech-badge">AWS Security</span>
+                                        <span class="tech-badge">Compliance</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="consulting-card">
+                                <div class="consulting-header">
+                                    <div class="consulting-icon">
+                                        <i class="fas fa-chalkboard-teacher"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Security Training & Workshops</h4>
+                                        <p class="consulting-type">Training Services</p>
+                                        <p class="consulting-duration">2024 - Present</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="consulting-description">
+                                    <p>Delivering cybersecurity training and workshops for educational institutions and corporate clients.</p>
+                                    
+                                    <div class="consulting-services">
+                                        <h5>Training Topics:</h5>
+                                        <ul>
+                                            <li>Secure coding practices for developers</li>
+                                            <li>OWASP Top 10 awareness workshops</li>
+                                            <li>Web application security fundamentals</li>
+                                            <li>Hands-on vulnerability exploitation labs</li>
+                                            <li>AWS security best practices</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="consulting-metrics">
+                                        <div class="metric">
+                                            <span class="metric-number">5+</span>
+                                            <span class="metric-label">Workshops</span>
+                                        </div>
+                                        <div class="metric">
+                                            <span class="metric-number">200+</span>
+                                            <span class="metric-label">Participants</span>
+                                        </div>
+                                        <div class="metric">
+                                            <span class="metric-number">4.8/5</span>
+                                            <span class="metric-label">Avg Rating</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="experience-tech">
+                                        <span class="tech-badge">Training</span>
+                                        <span class="tech-badge">OWASP</span>
+                                        <span class="tech-badge">Secure Coding</span>
+                                        <span class="tech-badge">Workshops</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="consulting-card">
+                                <div class="consulting-header">
+                                    <div class="consulting-icon">
+                                        <i class="fas fa-tools"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Security Tool Development</h4>
+                                        <p class="consulting-type">Open Source & Custom</p>
+                                        <p class="consulting-duration">2023 - Present</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="consulting-description">
+                                    <p>Developing custom security tools and contributing to open-source security projects.</p>
+                                    
+                                    <div class="consulting-services">
+                                        <h5>Key Projects:</h5>
+                                        <ul>
+                                            <li>Custom vulnerability scanner for Node.js applications</li>
+                                            <li>AWS WAF rule generator based on OWASP guidelines</li>
+                                            <li>Security reporting dashboard for development teams</li>
+                                            <li>Automated code review tools integration</li>
+                                            <li>Security metrics tracking automation</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="consulting-metrics">
+                                        <div class="metric">
+                                            <span class="metric-number">12+</span>
+                                            <span class="metric-label">Tools Built</span>
+                                        </div>
+                                        <div class="metric">
+                                            <span class="metric-number">3</span>
+                                            <span class="metric-label">Open Source</span>
+                                        </div>
+                                        <div class="metric">
+                                            <span class="metric-number">500+</span>
+                                            <span class="metric-label">GitHub Stars</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="experience-tech">
+                                        <span class="tech-badge">Python</span>
+                                        <span class="tech-badge">Node.js</span>
+                                        <span class="tech-badge">Tool Development</span>
+                                        <span class="tech-badge">Open Source</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <!-- Skills Summary -->
+                    <div class="skills-summary">
+                        <h3><i class="fas fa-chart-line"></i> Professional Growth</h3>
+                        <div class="growth-stats">
+                            <div class="growth-item">
+                                <div class="growth-icon">
+                                    <i class="fas fa-bug"></i>
+                                </div>
+                                <div>
+                                    <h4>500+</h4>
+                                    <p>Vulnerabilities Identified & Remediated</p>
+                                </div>
+                            </div>
+                            <div class="growth-item">
+                                <div class="growth-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div>
+                                    <h4>40+</h4>
+                                    <p>Applications Secured</p>
+                                </div>
+                            </div>
+                            <div class="growth-item">
+                                <div class="growth-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div>
+                                    <h4>250+</h4>
+                                    <p>Developers Trained</p>
+                                </div>
+                            </div>
+                            <div class="growth-item">
+                                <div class="growth-icon">
+                                    <i class="fas fa-cloud"></i>
+                                </div>
+                                <div>
+                                    <h4>20+</h4>
+                                    <p>Cloud Security Implementations</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="credentials" class="credentials">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Education & Certifications</h2>
+                    <p>Academic foundation and professional certifications in cybersecurity</p>
+                </div>
+                
+                <div class="credentials-content">
+                    <div class="education-section">
+                        <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+                        <div class="education-list">
+                            <div class="education-item">
+                                <div class="education-header">
+                                    <h4>Bachelor's of Engineering (Hons.)</h4>
+                                    <span class="education-year">2020 - 2024</span>
+                                </div>
+                                <p class="education-institution">BITS Pilani</p>
+                                <p class="education-details">Electronics and Communications Engineering</p>
+                                <!-- <div class="education-highlights">
+                                    <span class="highlight-tag">CGPA: 8.5/10</span>
+                                    <span class="highlight-tag">Security Focus</span>
+                                    <span class="highlight-tag">Dean's List</span>
+                                </div> -->
+                            </div>
+                            
+                            <!-- <div class="education-item">
+                                <div class="education-header">
+                                    <h4>Higher Secondary Certificate (HSC)</h4>
+                                    <span class="education-year">2017 - 2019</span>
+                                </div>
+                                <p class="education-institution">Your School/College Name</p>
+                                <p class="education-details">Science stream with Mathematics, Physics, Chemistry, and Computer Science.</p>
+                                <div class="education-highlights">
+                                    <span class="highlight-tag">95.2%</span>
+                                    <span class="highlight-tag">Computer Science</span>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="certifications-section">
+                        <h3><i class="fas fa-certificate"></i> Certifications</h3>
+                        <div class="certifications-grid">
+                            <div class="cert-card">
+                                <div class="cert-header">
+                                    <div class="cert-logo">
+                                        <i class="fab fa-aws"></i>
+                                    </div>
+                                    <div class="cert-info">
+                                        <h4>AWS Certified Solutions Architect - Associate</h4>
+                                        <p class="cert-issuer">Amazon Web Services</p>
+                                        <p class="cert-date">Obtained: Q2 2025</p>
+                                    </div>
+                                </div>
+                                <p class="cert-description">Validates expertise in designing distributed systems on AWS, including high availability, cost optimization, security, and scalability.</p>
+                                <div class="cert-actions">
+                                    <span class="cert-status completed">Certified</span>
+                                    <a href="#" class="cert-link">View Syllabus</a>
+                                </div>
+                            </div>
+
+                            <div class="cert-card">
+                                <div class="cert-header">
+                                    <div class="cert-logo">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <div class="cert-info">
+                                        <h4>CompTIA Security+</h4>
+                                        <p class="cert-issuer">CompTIA</p>
+                                        <p class="cert-date">Obtained: Jan 2024</p>
+                                    </div>
+                                </div>
+                                <p class="cert-description">Covers baseline cybersecurity skills, including threat detection, incident response, risk management, identity and access management, and secure network architecture.</p>
+                                <div class="cert-actions">
+                                    <span class="cert-status completed">Certified</span>
+                                    <a href="#" class="cert-link">View Certification</a>
+                                </div>
+                            </div>
+                            <div class="cert-card">
+                                <div class="cert-header">
+                                    <div class="cert-logo">
+                                        <i class="fas fa-code"></i>
+                                    </div>
+                                    <div class="cert-info">
+                                        <h4>Certificate of Cloud Security Knowledge (CCSK)</h4>
+                                        <p class="cert-issuer">Cloud Security Alliance</p>
+                                        <p class="cert-date">Expected: Q4 2025</p>
+                                    </div>
+                                </div>
+                                <p class="cert-description">Demonstrates knowledge of cloud security best practices, including cloud architecture, governance, compliance, risk management, and the shared responsibility model.</p>
+                                <div class="cert-actions">
+                                    <span class="cert-status planned">Planned</span>
+                                    <a href="#" class="cert-link">Learn More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+ 
+                    <!-- <div class="learning-path">
+                        <h3><i class="fas fa-route"></i> Certification Roadmap</h3>
+                        <div class="roadmap-timeline">
+                            <div class="timeline-item completed">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <h4>Foundation Phase</h4>
+                                    <p>CEH, Python for Cybersecurity</p>
+                                    <span class="timeline-date">2023-2024</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item current">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <h4>Specialization Phase</h4>
+                                    <p>AWS Security Specialty, GWEB</p>
+                                    <span class="timeline-date">2024-2025</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item future">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <h4>Advanced Phase</h4>
+                                    <p>CISSP Associate, CSSLP</p>
+                                    <span class="timeline-date">2025-2026</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Security Projects</h2>
+                    <p>Practical implementations and security tooling</p>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div>
+                            <h3>OWASP Juice Shop Security Hardening</h3>
+                            <p>Comprehensive vulnerability assessment and remediation of the famous vulnerable web application</p>
+                        </div>
+                        <div class="project-links">
+                            <a href="#"><i class="fab fa-github"></i> Code</a>
+                            <a href="#"><i class="fas fa-external-link-alt"></i> Demo</a>
+                        </div>
+                    </div>
+                    <p>
+                        Systematic analysis and fixing of all OWASP Juice Shop vulnerabilities, including custom AWS WAF rules, 
+                        secure coding implementations, and automated security testing pipelines. This project demonstrates 
+                        end-to-end application security from code to cloud.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">AWS WAF</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">Security Testing</span>
+                        <span class="tech-tag">CI/CD</span>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div>
+                            <h3>Automated Security Scanner</h3>
+                            <p>Custom vulnerability scanner focused on OWASP Top 10 detection</p>
+                        </div>
+                        <div class="project-links">
+                            <a href="#"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                    <p>
+                        Python-based security scanner that automates detection of common web vulnerabilities. 
+                        Includes custom rules for SQL injection, XSS, and authentication bypass detection with 
+                        detailed reporting and remediation suggestions.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Security Automation</span>
+                        <span class="tech-tag">REST APIs</span>
+                        <span class="tech-tag">Reporting</span>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div>
+                            <h3>Secure Development Guidelines</h3>
+                            <p>Comprehensive security guidelines and code review checklists</p>
+                        </div>
+                        <div class="project-links">
+                            <a href="#"><i class="fab fa-github"></i> Repository</a>
+                        </div>
+                    </div>
+                    <p>
+                        Documentation project providing practical secure coding guidelines, threat modeling templates, 
+                        and security review checklists for development teams. Includes real-world examples and 
+                        implementation guides for various frameworks.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Documentation</span>
+                        <span class="tech-tag">Threat Modeling</span>
+                        <span class="tech-tag">Code Review</span>
+                        <span class="tech-tag">Best Practices</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2>Let's Build Secure Software Together</h2>
+                <p>
+                    Interested in application security, vulnerability research, or secure development practices? 
+                    I'd love to connect and discuss how we can make the web more secure.
+                </p>
+                <div class="cta-buttons">
+                    <!-- <a href="mailto:your.email@example.com" class="btn btn-primary"> -->
+                    <a id="emailLink" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i>
+                        Email Me
+                    </a>
+                    
+                </div>
+                <div class="social-links">
+                    <a id="linkedinLink" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a id="gitHubLink" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a id="twitterLink" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a id="mediumLink" title="Medium"><i class="fab fa-medium"></i></a>
+                </div>
+            </div>
+        </section>
     </main>
-</body>
 
+    <footer>
+        <div class="container">
+            <p id="footerLine"></p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Dynamic typing effect for hero section (optional enhancement)
+        const heroTitle = document.querySelector('.hero h1');
+        const roles = ['Application Security Engineer', 'Vulnerability Researcher', 'Secure Code Advocate'];
+        let currentRole = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeRole() {
+            const currentText = roles[currentRole];
+            
+            if (!isDeleting) {
+                heroTitle.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+                
+                if (charIndex === currentText.length) {
+                    isDeleting = true;
+                    setTimeout(typeRole, 2000);
+                    return;
+                }
+            } else {
+                heroTitle.textContent = currentText.substring(0, charIndex);
+                charIndex--;
+                
+                if (charIndex === 0) {
+                    isDeleting = false;
+                    currentRole = (currentRole + 1) % roles.length;
+                }
+            }
+            
+            setTimeout(typeRole, isDeleting ? 50 : 100);
+        }
+
+        // Uncomment the line below if you want the typing effect
+        // setTimeout(typeRole, 2000);
+    </script>
+
+    
+    <script>
+        const hostname = window.location.hostname;
+
+        let name = "";
+        let title = "";
+        let footerLine = "";
+        let email = "";
+        let linkedinLink = "";
+        let gitHubLink = "";
+        let twitterLink = "";
+        let mediumLink = "";
+
+        if (hostname.includes("ashcarnov.github.io")) {
+            name = "Ash Carnov";
+            footerLine = "Ash Carnov. Building secure applications, one line of code at a time.";
+            title = "Ash Carnov - Application Security Engineer"
+            email = "ashcarnov@example.com";
+            linkedinLink = "https://linkedin.com/in/karanamashutosh";
+            gitHubLink = "https://github.com/AshCarnov/";
+            twitterLink = "https://x.com/AshCarnov";
+            mediumLink = "https://example.com";
+        } else if (hostname.includes("karashutosh.github.io")) {
+            name = "Ashutosh Karanam";
+            footerLine = "Ashutosh Karanam. Building secure applications, one line of code at a time.";
+            title = "Ash Carnov - Application Security Engineer"
+            email = "ashutoshdeveloping@example.com";
+            linkedinLink = "https://linkedin.com/in/karanamashutosh";
+            gitHubLink = "https://github.com/KarAshutosh/";
+            twitterLink = "https://x.com/AshutoshKaranam";
+            mediumLink = "https://example.com";
+        } else {
+            name = "Ashutosh Karanam";
+            footerLine = "Ashutosh Karanam. Building secure applications, one line of code at a time.";
+            title = "Ashutosh Karanam - Application Security Engineer"
+            email = "ashutoshdeveloping@example.com";
+            linkedinLink = "https://linkedin.com/in/karanamashutosh";
+            gitHubLink = "https://github.com/KarAshutosh/";
+            twitterLink = "https://x.com/AshutoshKaranam";
+            mediumLink = "https://example.com";
+        }
+
+        document.getElementById("name").textContent = name;
+        document.getElementById("footerLine").textContent = footerLine;
+        document.getElementById("title").textContent = title;
+        document.getElementById("emailLink").href = "mailto:" + email;
+        document.getElementById("linkedinLink").href = linkedinLink;
+        document.getElementById("gitHubLink").href = gitHubLink;
+        document.getElementById("twitterLink").href = twitterLink;
+        document.getElementById("mediumLink").href = mediumLink;
+    
+    </script>
+</body>
 </html>
