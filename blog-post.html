@@ -274,12 +274,24 @@
 
         let title = "";
 
-        if (hostname.includes("kashsecurity.github.io")) {
-            title = "Blog Post - K Ash Security"
+        function setProfile(profile) {
+            if (profile === "kashsecurity") {
+                title = "Blog Post - K Ash Security"
+            } else if (profile === "karashutosh") {
+                title = "Blog Post - Ashutosh Karanam"
+            } else {
+                title = "Blog Post - Ashutosh Karanam"
+            }
+        }
+
+        if (siteParam) {
+            setProfile(siteParam.toLowerCase());
+        } else if (hostname.includes("kashsecurity.github.io")) {
+            setProfile("kashsecurity");
         } else if (hostname.includes("karashutosh.github.io")) {
-            title = "Blog Post - Ashutosh Karanam"
+            setProfile("karashutosh");
         } else {
-            title = "Blog Post - Ashutosh Karanam"
+            setProfile("");
         }
 
         document.getElementById("title").textContent = title;

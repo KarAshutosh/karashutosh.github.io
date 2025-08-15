@@ -2045,6 +2045,9 @@
 
     
     <script>
+
+        const params = new URLSearchParams(window.location.search);
+        const siteParam = params.get("site");
         const hostname = window.location.hostname;
 
         let name = "";
@@ -2056,33 +2059,45 @@
         let twitterLink = "";
         let mediumLink = "";
 
-        if (hostname.includes("kashsecurity.github.io")) {
-            name = "K Ash Security";
-            footerLine = "K Ash Security. Building and deploying secure applications.";
-            title = "K Ash Security - Cybersecurity Engineer"
-            email = "ashutoshdeveloping@gmail.com";
-            linkedinLink = "https://linkedin.com/in/karanamashutosh";
-            gitHubLink = "https://github.com/KAshSecurity/";
-            twitterLink = "https://x.com/KAshSecurity";
-            mediumLink = "https://kashsecurity.medium.com";
+        function setProfile(profile) {
+            if (profile === "kashsecurity") {
+                name = "K Ash Security";
+                footerLine = "K Ash Security. Building and deploying secure applications.";
+                title = "K Ash Security - Cybersecurity Engineer";
+                email = "ashutoshdeveloping@gmail.com";
+                linkedinLink = "https://linkedin.com/in/karanamashutosh";
+                gitHubLink = "https://github.com/KAshSecurity/";
+                twitterLink = "https://x.com/KAshSecurity";
+                mediumLink = "https://kashsecurity.medium.com";
+            } else if (profile === "karashutosh") {
+                name = "Ashutosh Karanam";
+                footerLine = "Ashutosh Karanam. Building and deploying secure applications.";
+                title = "Ashutosh Karanam - Cybersecurity Engineer";
+                email = "ashutoshdeveloping@gmail.com";
+                linkedinLink = "https://linkedin.com/in/karanamashutosh";
+                gitHubLink = "https://github.com/KarAshutosh/";
+                twitterLink = "https://x.com/AshutoshKaranam";
+                mediumLink = "https://kashsecurity.medium.com";
+            } else {
+                name = "Ashutosh Karanam";
+                footerLine = "Ashutosh Karanam. Building and deploying secure applications.";
+                title = "Ashutosh Karanam"
+                email = "ashutoshdeveloping@gmail.com";
+                linkedinLink = "https://linkedin.com/in/karanamashutosh";
+                gitHubLink = "https://github.com/KarAshutosh/";
+                twitterLink = "https://x.com/AshutoshKaranam";
+                mediumLink = "https://kashsecurity.medium.com";
+            }
+        }
+
+        if (siteParam) {
+            setProfile(siteParam.toLowerCase());
+        } else if (hostname.includes("kashsecurity.github.io")) {
+            setProfile("kashsecurity");
         } else if (hostname.includes("karashutosh.github.io")) {
-            name = "Ashutosh Karanam";
-            footerLine = "Ashutosh Karanam. Building and deploying secure applications.";
-            title = "Ashutosh Karanam - Cybersecurity Engineer"
-            email = "ashutoshdeveloping@gmail.com";
-            linkedinLink = "https://linkedin.com/in/karanamashutosh";
-            gitHubLink = "https://github.com/KarAshutosh/";
-            twitterLink = "https://x.com/AshutoshKaranam";
-            mediumLink = "https://kashsecurity.medium.com";
+            setProfile("karashutosh");
         } else {
-            name = "Ashutosh Karanam";
-            footerLine = "Ashutosh Karanam. Building and deploying secure applications.";
-            title = "Ashutosh Karanam - Cybersecurity Engineer"
-            email = "ashutoshdeveloping@gmail.com";
-            linkedinLink = "https://linkedin.com/in/karanamashutosh";
-            gitHubLink = "https://github.com/KarAshutosh/";
-            twitterLink = "https://x.com/AshutoshKaranam";
-            mediumLink = "https://kashsecurity.medium.com";
+            setProfile("");
         }
 
         document.getElementById("name").textContent = name;
@@ -2095,7 +2110,7 @@
         document.getElementById("mediumLink").href = mediumLink;
 
         if (hostname.includes("kashsecurity.github.io")) {
-            var youtubeLink = "https://www.youtube.com/@kashsecurity";
+            var youtubeLink = "https://www.youtube.com/@SecurityWithKAsh";
             var yt = document.getElementById('youtubeLink');
             if (yt) {
                 yt.href = youtubeLink;
