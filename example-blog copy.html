@@ -642,12 +642,133 @@
         const blogPosts = [
             {
                 id: 1,
-                title: "Reflected XSS Filter Bypass in Search Functionality",
-                excerpt: "Two years ago, I bypassed a site's XSS filter with a simple HTML trick, executing JavaScript in the browser. Now fixed, it's a reminder that proper encoding is key.",
+                title: "SQL Injection in OWASP Juice Shop: From Discovery to AWS WAF Protection",
+                excerpt: "A comprehensive analysis of SQL injection vulnerabilities in OWASP Juice Shop, including detailed code-level fixes and AWS WAF rule implementation to prevent exploitation at the infrastructure level.",
                 date: "2024-12-15",
                 readTime: "15 min read",
                 severity: "Critical",
-                topics: ["XSS", "Security Testing"],
+                topics: ["SQL Injection", "Node.js", "AWS WAF", "Vulnerability Analysis"],
+                githubUrl: "#",
+                mediumUrl: "#"
+            },
+            {
+                id: 2,
+                title: "XSS Vulnerabilities: Client-Side Fixes and Server-Side Protection",
+                excerpt: "Exploring reflected and stored XSS vulnerabilities in modern web applications, implementing proper input validation, output encoding, and CSP headers for comprehensive protection.",
+                date: "2024-12-10",
+                readTime: "12 min read",
+                severity: "High",
+                topics: ["XSS", "JavaScript", "CSP", "Secure Coding"],
+                githubUrl: "#",
+                mediumUrl: "#"
+            },
+            {
+                id: 3,
+                title: "Authentication Bypass: Multi-Layer Security Implementation",
+                excerpt: "Analyzing authentication flaws and implementing secure session management, JWT best practices, and rate limiting through AWS WAF to create robust authentication systems.",
+                date: "2024-12-05",
+                readTime: "18 min read",
+                severity: "Critical",
+                topics: ["Authentication", "JWT", "AWS", "Security Testing"],
+                githubUrl: "#",
+                mediumUrl: "#"
+            },
+            {
+                id: 4,
+                title: "CSRF Protection: Beyond Basic Token Validation",
+                excerpt: "Deep dive into Cross-Site Request Forgery attacks and implementing comprehensive protection mechanisms including SameSite cookies, custom headers, and double-submit patterns.",
+                date: "2024-11-28",
+                readTime: "10 min read",
+                severity: "Medium",
+                topics: ["CSRF", "JavaScript", "Secure Coding"],
+                githubUrl: "#",
+                mediumUrl: "#"
+            },
+            {
+                id: 5,
+                title: "Insecure Direct Object References (IDOR): Detection and Prevention",
+                excerpt: "Understanding IDOR vulnerabilities through practical examples, implementing proper authorization checks, and creating automated testing strategies to prevent these critical flaws.",
+                date: "2024-11-20",
+                readTime: "14 min read",
+                severity: "High",
+                topics: ["IDOR", "Authorization", "Node.js", "Security Testing"],
+                githubUrl: "#",
+                mediumUrl: "#"
+            },
+            {
+                id: 6,
+                title: "Secure File Upload Implementation: A Complete Guide",
+                excerpt: "Comprehensive guide to implementing secure file upload functionality, covering file type validation, content scanning, storage best practices, and AWS S3 security configurations.",
+                date: "2024-11-15",
+                readTime: "16 min read",
+                severity: "High",
+                topics: ["File Upload", "AWS", "Vulnerability Analysis", "Secure Coding"],
+                githubUrl: "#",
+                mediumUrl: "#"
+            },
+            {
+                id: 7,
+                title: "JWT Security: Common Pitfalls and Best Practices",
+                excerpt: "Exploring JWT implementation vulnerabilities including algorithm confusion, secret key management, and token expiration strategies with practical Node.js examples.",
+                date: "2024-11-08",
+                readTime: "13 min read",
+                severity: "Medium",
+                topics: ["JWT", "Authentication", "Node.js", "Code Review"],
+                githubUrl: "#",
+                mediumUrl: "#"
+            },
+            {
+                id: 8,
+                title: "AWS WAF Rule Optimization for Web Application Security",
+                excerpt: "Advanced AWS WAF configuration techniques, custom rule creation, and performance optimization strategies for protecting modern web applications from common attacks.",
+                date: "2024-11-01",
+                readTime: "20 min read",
+                severity: "Medium",
+                topics: ["AWS WAF", "AWS", "Security Testing"],
+                githubUrl: "#",
+                mediumUrl: "#"
+            },
+            {
+                id: 9,
+                title: "Race Condition Vulnerabilities in Web Applications",
+                excerpt: "Identifying and exploiting race condition vulnerabilities in multi-threaded applications, with practical examples and mitigation strategies using proper locking mechanisms.",
+                date: "2024-10-25",
+                readTime: "17 min read",
+                severity: "Medium",
+                topics: ["Race Conditions", "Node.js", "Vulnerability Analysis"],
+                githubUrl: "#",
+                mediumUrl: "#"
+            },
+            {
+                id: 10,
+                title: "Container Security: Securing Docker Applications",
+                excerpt: "Best practices for securing containerized applications, including image scanning, runtime protection, and security policies for production Docker deployments.",
+                date: "2024-10-18",
+                readTime: "11 min read",
+                severity: "High",
+                topics: ["Docker", "Container Security", "AWS"],
+                githubUrl: "#",
+                mediumUrl: "#"
+            },
+            {
+                id: 11,
+                title: "API Security: Rate Limiting and Abuse Prevention",
+                excerpt: "Implementing comprehensive API security measures including rate limiting, API key management, and abuse detection using AWS API Gateway and custom middleware.",
+                date: "2024-10-10",
+                readTime: "9 min read",
+                severity: "Low",
+                topics: ["API Security", "AWS", "Node.js"],
+                githubUrl: "#",
+                mediumUrl: "#"
+            },
+            {
+                id: 12,
+                title: "Security Code Review: Automated Tools vs Manual Analysis",
+                excerpt: "Comparing automated security scanning tools with manual code review techniques, creating effective security review processes for development teams.",
+                date: "2024-10-03",
+                readTime: "8 min read",
+                severity: "Low",
+                topics: ["Code Review", "Security Testing", "Secure Coding"],
                 githubUrl: "#",
                 mediumUrl: "#"
             }
