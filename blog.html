@@ -641,24 +641,8 @@
         </section>
     </main>
 
+    <script src="blog-posts.js"></script>
     <script>
-        // Blog posts data - you'll update this with your actual posts
-        const blogPosts = [
-            {
-                id: 1,
-                title: "Reflected XSS Filter Bypass in Search Functionality",
-                excerpt: "Two years ago, I bypassed a site's XSS filter with a simple HTML trick, executing JavaScript in the browser. Now fixed, it's a reminder that proper encoding is key.",
-                date: "2025-08-15",
-                readTime: "15 min read",
-                severity: "Medium",
-                topics: ["XSS", "Security Testing", "Bug Hunting"],
-                githubUrl: "blog-post.html?id=1",
-                mediumUrl: "https://medium.com/@yourusername/xss-filter-bypass",
-                markdownUrl: "blogs/blog1.md",
-                blogTitle: "Reflected XSS Filter Bypass in Search Functionality"
-            }
-        ];
-
         let filteredPosts = [...blogPosts];
 
         // DOM Elements
