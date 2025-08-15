@@ -90,6 +90,34 @@
             color: #00ab6c;
             font-size: 1.5rem;
         }
+        .share-bar {
+            max-width: 800px;
+            margin: 1.5rem auto 0 auto;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+        .share-bar button, .share-bar a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .share-bar button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .share-bar a {
+            background: var(--bg-card);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            cursor: pointer;
+        }
         .markdown-container {
             background: var(--bg-card);
             border-radius: 16px;
@@ -151,16 +179,35 @@
         <i class="fab fa-medium"></i>
         This blog is available in full on <a id="mediumLink" href="#" target="_blank" style="color:#00ab6c;font-weight:700;">Medium</a>
     </div>
+    <div class="share-bar" style="max-width:800px;margin:1.5rem auto 0 auto;display:flex;justify-content:flex-end;gap:1rem;">
+        <button id="shareBtn" style="background:var(--primary-color);color:white;border:none;padding:0.5rem 1.2rem;border-radius:8px;cursor:pointer;font-weight:600;display:flex;align-items:center;gap:0.5rem;">
+            <i class="fas fa-share-alt"></i> Share
+        </button>
+        <a id="copyLinkBtn" href="#" style="background:var(--bg-card);color:var(--primary-color);border:1px solid var(--primary-color);padding:0.5rem 1.2rem;border-radius:8px;cursor:pointer;font-weight:600;display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+            <i class="fas fa-link"></i> Copy Link
+        </a>
+    </div>
     <div class="markdown-container" id="markdownContent">
         <!-- Markdown will be rendered here -->
         <div style="text-align:center;color:var(--text-light);">Loading blog post...</div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
-        // Get values from localStorage (fallback to defaults if not present)
-        const markdownUrl = localStorage.getItem('blogMarkdownUrl') || "blogs/sample-blog.md";
-        const mediumUrl = localStorage.getItem('blogMediumUrl') || "https://medium.com/@yourusername";
-        const blogTitle = localStorage.getItem('blogTitle') || "Sample Blog Post Title";
+        // Utility to get URL parameters
+        function getParam(name) {
+            const url = new URL(window.location.href);
+            return url.searchParams.get(name);
+        }
+
+        // Try to get blog info from URL parameters
+        let markdownUrl = getParam('md');
+        let mediumUrl = getParam('medium');
+        let blogTitle = getParam('title');
+
+        // If not present, fallback to localStorage
+        if (!markdownUrl) markdownUrl = localStorage.getItem('blogMarkdownUrl') || "blogs/sample-blog.md";
+        if (!mediumUrl) mediumUrl = localStorage.getItem('blogMediumUrl') || "https://medium.com/@yourusername";
+        if (!blogTitle) blogTitle = localStorage.getItem('blogTitle') || "Sample Blog Post Title";
 
         // Set title and Medium link
         document.getElementById('postTitle').textContent = blogTitle;
@@ -175,6 +222,37 @@
             .catch(() => {
                 document.getElementById('markdownContent').innerHTML = "<div style='color:var(--danger-color);text-align:center;'>Failed to load blog post.</div>";
             });
+
+        // Share functionality
+        const shareBtn = document.getElementById('shareBtn');
+        const copyLinkBtn = document.getElementById('copyLinkBtn');
+        // Always generate a share URL with parameters
+        const shareUrl = `${window.location.origin}${window.location.pathname}?md=${encodeURIComponent(markdownUrl)}&medium=${encodeURIComponent(mediumUrl)}&title=${encodeURIComponent(blogTitle)}`;
+
+        shareBtn.addEventListener('click', async () => {
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: blogTitle,
+                        url: shareUrl
+                    });
+                } catch (e) {
+                    // User cancelled or error
+                }
+            } else {
+                // Fallback: copy to clipboard
+                navigator.clipboard.writeText(shareUrl);
+                shareBtn.textContent = "Link Copied!";
+                setTimeout(() => shareBtn.innerHTML = '<i class="fas fa-share-alt"></i> Share', 1500);
+            }
+        });
+
+        copyLinkBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            navigator.clipboard.writeText(shareUrl);
+            copyLinkBtn.textContent = "Copied!";
+            setTimeout(() => copyLinkBtn.innerHTML = '<i class="fas fa-link"></i> Copy Link', 1500);
+        });
     </script>
 </body>
 </html>
