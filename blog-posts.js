@@ -8,7 +8,7 @@ window.blogPosts = [
         severity: "Medium",
         topics: ["XSS", "Security Testing", "Bug Hunting"],
         githubUrl: "blog-post.html?id=1",
-        mediumUrl: "https://medium.com/@kashsecurity/xss-filter-bypass",
+        mediumUrl: "https://kashsecurity.medium.com/reflected-xss-filter-bypass-in-search-functionality-be2d511e7621",
         markdownUrl: "blogs/blog1.md",
         blogTitle: "Reflected XSS Filter Bypass in Search Functionality"
     }
