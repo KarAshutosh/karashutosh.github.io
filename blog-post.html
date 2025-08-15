@@ -193,28 +193,61 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
+        // Blog posts data (should match blog.html)
+        const blogPosts = [
+            {
+                id: 1,
+                title: "Reflected XSS Filter Bypass in Search Functionality",
+                excerpt: "Two years ago, I bypassed a site's XSS filter with a simple HTML trick, executing JavaScript in the browser. Now fixed, it's a reminder that proper encoding is key.",
+                date: "2025-08-15",
+                readTime: "15 min read",
+                severity: "Medium",
+                topics: ["XSS", "Security Testing", "Bug Hunting"],
+                githubUrl: "#",
+                mediumUrl: "https://medium.com/@yourusername/xss-filter-bypass",
+                markdownUrl: "blogs/blog1.md",
+                blogTitle: "Reflected XSS Filter Bypass in Search Functionality"
+            }
+            // Add more posts here as needed
+        ];
+
         // Utility to get URL parameters
         function getParam(name) {
             const url = new URL(window.location.href);
             return url.searchParams.get(name);
         }
 
-        // Try to get blog info from URL parameters
-        let markdownUrl = getParam('md');
-        let mediumUrl = getParam('medium');
-        let blogTitle = getParam('title');
+        // Get blog ID from URL
+        let blogId = getParam('id');
+        let post;
 
-        // If not present, fallback to localStorage
-        if (!markdownUrl) markdownUrl = localStorage.getItem('blogMarkdownUrl') || "blogs/sample-blog.md";
-        if (!mediumUrl) mediumUrl = localStorage.getItem('blogMediumUrl') || "https://medium.com/@yourusername";
-        if (!blogTitle) blogTitle = localStorage.getItem('blogTitle') || "Sample Blog Post Title";
+        if (blogId) {
+            post = blogPosts.find(p => String(p.id) === String(blogId));
+        }
+
+        // Fallback to localStorage if not found by ID
+        if (!post) {
+            const markdownUrl = localStorage.getItem('blogMarkdownUrl');
+            const mediumUrl = localStorage.getItem('blogMediumUrl');
+            const blogTitle = localStorage.getItem('blogTitle');
+            post = blogPosts.find(p =>
+                p.markdownUrl === markdownUrl &&
+                p.mediumUrl === mediumUrl &&
+                p.blogTitle === blogTitle
+            );
+        }
+
+        // If still not found, fallback to first post or show error
+        if (!post) {
+            post = blogPosts[0];
+        }
 
         // Set title and Medium link
-        document.getElementById('postTitle').textContent = blogTitle;
-        document.getElementById('mediumLink').href = mediumUrl;
+        document.getElementById('postTitle').textContent = post.blogTitle;
+        document.getElementById('mediumLink').href = post.mediumUrl;
 
         // Fetch and render markdown
-        fetch(markdownUrl)
+        fetch(post.markdownUrl)
             .then(res => res.text())
             .then(md => {
                 document.getElementById('markdownContent').innerHTML = marked.parse(md);
@@ -226,21 +259,20 @@
         // Share functionality
         const shareBtn = document.getElementById('shareBtn');
         const copyLinkBtn = document.getElementById('copyLinkBtn');
-        // Always generate a share URL with parameters
-        const shareUrl = `${window.location.origin}${window.location.pathname}?md=${encodeURIComponent(markdownUrl)}&medium=${encodeURIComponent(mediumUrl)}&title=${encodeURIComponent(blogTitle)}`;
+        // Share URL now only uses the blog ID
+        const shareUrl = `${window.location.origin}${window.location.pathname}?id=${encodeURIComponent(post.id)}`;
 
         shareBtn.addEventListener('click', async () => {
             if (navigator.share) {
                 try {
                     await navigator.share({
-                        title: blogTitle,
+                        title: post.blogTitle,
                         url: shareUrl
                     });
                 } catch (e) {
                     // User cancelled or error
                 }
             } else {
-                // Fallback: copy to clipboard
                 navigator.clipboard.writeText(shareUrl);
                 shareBtn.textContent = "Link Copied!";
                 setTimeout(() => shareBtn.innerHTML = '<i class="fas fa-share-alt"></i> Share', 1500);
