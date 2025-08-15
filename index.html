@@ -1901,6 +1901,7 @@
                     <a id="gitHubLink" title="GitHub"><i class="fab fa-github"></i></a>
                     <a id="twitterLink" title="Twitter"><i class="fab fa-twitter"></i></a>
                     <a id="mediumLink" title="Medium"><i class="fab fa-medium"></i></a>
+                    <a id="youtubeLink" title="YouTube" style="display:none;"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </section>
@@ -2031,6 +2032,15 @@
         document.getElementById("gitHubLink").href = gitHubLink;
         document.getElementById("twitterLink").href = twitterLink;
         document.getElementById("mediumLink").href = mediumLink;
+
+        if (hostname.includes("kashsecurity.github.io")) {
+            var youtubeLink = "https://www.youtube.com/@kashsecurity";
+            var yt = document.getElementById('youtubeLink');
+            if (yt) {
+                yt.href = youtubeLink;
+                yt.style.display = "";
+            }
+        }
     
     </script>
 </body>
