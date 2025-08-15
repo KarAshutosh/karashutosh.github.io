@@ -277,6 +277,11 @@
             background: rgba(16, 185, 129, 0.1);
             color: var(--success-color);
         }
+        
+        .severity-informational {
+            background: rgba(60, 67, 63, 0.1);
+            color: var(--text-light);
+        }
 
         /* Experience Section */
         .experience {
@@ -1203,7 +1208,7 @@
                 </div>
             </div>
         </section>
-
+<!-- 
         <section id="blog" class="blog">
             <div class="container">
                 <div class="section-header">
@@ -1250,6 +1255,64 @@
                         <div class="blog-card-body">
                             <span class="severity-badge severity-critical">Critical</span>
                             <p>Analyzing authentication flaws and implementing secure session management practices.</p>
+                        </div>
+                    </article>
+                </div>
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="blog.html" class="btn btn-primary">
+                        <i class="fas fa-arrow-right"></i>
+                        View All Blog Posts
+                    </a>
+                </div>
+            </div>
+        </section> -->
+
+        <section id="blog" class="blog">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Latest Security Research</h2>
+                    <p>Recent insights from my vulnerability research and security implementations</p>
+                </div>
+                <div class="blog-grid">
+                    <article class="blog-card fade-in" style="cursor:pointer;" onclick="window.location.href='blog-post.html?id=1'">
+                        <div class="blog-card-header">
+                            <h3>Reflected XSS Filter Bypass in Search Functionality</h3>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-calendar"></i> 15th August, 2025</span>
+                                <span><i class="fas fa-clock"></i> 3 min read</span>
+                            </div>
+                        </div>
+                        <div class="blog-card-body">
+                            <span class="severity-badge severity-medium">Medium</span>
+                            <p>Two years ago, I bypassed a site's XSS filter with a simple HTML trick, executing JavaScript in the browser. Now fixed, it's a reminder that proper encoding is key.</p>
+                        </div>
+                    </article>
+
+                    <article class="blog-card fade-in" style="cursor:pointer;" onclick="window.location.href='blog-post.html?id=1'">
+                        <div class="blog-card-header">
+                            <h3>Linux hardening for web servers</h3>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-calendar"></i> Coming Soon</span>
+                                <span><i class="fas fa-clock"></i> 12 min read</span>
+                            </div>
+                        </div>
+                        <div class="blog-card-body">
+                            <span class="severity-badge severity-informational">Informational</span>
+                            <p>Coming soon</p>
+                        </div>
+                    </article>
+
+                    <article class="blog-card fade-in" style="cursor:pointer;" onclick="window.location.href='blog-post.html?id=1'">
+                        <div class="blog-card-header">
+                            <h3>Every OWASP Juice Shop Vulnerability</h3>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-calendar"></i> Coming Soon</span>
+                                <span><i class="fas fa-clock"></i> 18 min read</span>
+                            </div>
+                        </div>
+                        <div class="blog-card-body">
+                            <span class="severity-badge severity-informational">Informational</span>
+                            <p>Coming soon.</p>
                         </div>
                     </article>
                 </div>
@@ -1309,11 +1372,12 @@
 
                                     <div class="experience-tech">
                                         <span class="tech-badge">Application Security</span>
+                                        <span class="tech-badge">Cloud Security</span>
                                         <span class="tech-badge">AWS WAF</span>
                                         <span class="tech-badge">OWASP</span>
-                                        <span class="tech-badge">Vulnerability Assessment</span>
                                         <span class="tech-badge">SAST/DAST</span>
-                                        <span class="tech-badge">Incident Response</span>
+                                        <span class="tech-badge">SIEM</span>
+                                        <span class="tech-badge">IDS</span>
                                     </div>
                                 </div>
                             </div>
@@ -1343,11 +1407,8 @@
                                     </div>
 
                                     <div class="experience-tech">
-                                        <span class="tech-badge">SIEM</span>
-                                        <span class="tech-badge">Network Security</span>
                                         <span class="tech-badge">Vulnerability Scanning</span>
                                         <span class="tech-badge">Security Monitoring</span>
-                                        <span class="tech-badge">Incident Documentation</span>
                                     </div>
                                 </div>
                             </div>
