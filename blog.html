@@ -652,7 +652,7 @@
                 readTime: "15 min read",
                 severity: "Medium",
                 topics: ["XSS", "Security Testing", "Bug Hunting"],
-                githubUrl: "#",
+                githubUrl: "blog-post.html?id=1",
                 mediumUrl: "https://medium.com/@yourusername/xss-filter-bypass",
                 markdownUrl: "blogs/blog1.md",
                 blogTitle: "Reflected XSS Filter Bypass in Search Functionality"
@@ -699,12 +699,8 @@
                 if (githubLink) {
                     const postId = githubLink.getAttribute('data-post-id');
                     const post = blogPosts.find(p => p.id == postId);
-                    if (post) {
-                        localStorage.setItem('blogMarkdownUrl', post.markdownUrl);
-                        localStorage.setItem('blogMediumUrl', post.mediumUrl);
-                        localStorage.setItem('blogTitle', post.blogTitle);
-                        // Navigate to blog-post.html
-                        window.location.href = 'blog-post.html';
+                    if (post && post.githubUrl && post.githubUrl !== "#") {
+                        window.open(post.githubUrl, "_blank");
                     }
                     e.preventDefault();
                     return;
@@ -712,13 +708,7 @@
                 const card = e.target.closest('.blog-card');
                 if (card) {
                     const postId = card.getAttribute('data-post-id');
-                    const post = blogPosts.find(p => p.id == postId);
-                    if (post) {
-                        localStorage.setItem('blogMarkdownUrl', post.markdownUrl);
-                        localStorage.setItem('blogMediumUrl', post.mediumUrl);
-                        localStorage.setItem('blogTitle', post.blogTitle);
-                        window.location.href = 'blog-post.html';
-                    }
+                    window.location.href = `blog-post.html?id=${postId}`;
                 }
             });
         }
