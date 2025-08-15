@@ -273,10 +273,17 @@
     <script>
         const hostname = window.location.hostname;
         
-        if (params.has("site")) {
-            localStorage.setItem("siteProfile", params.get("site"));
+        let siteParam = "";
+        if (window.self !== window.top) {
+            if (!localStorage.getItem("siteProfile")) {
+                if (params.has("site")) {
+                    localStorage.setItem("siteProfile", params.get("site"));
+                    siteParam = localStorage.getItem("siteProfile");
+                } else {
+                    siteParam = "default";
+                }
+            }
         }
-        const siteParam = localStorage.getItem("siteProfile");
 
         let title = "";
 
@@ -286,7 +293,7 @@
             } else if (profile === "karashutosh") {
                 title = "Blog Post - Ashutosh Karanam"
             } else {
-                title = "Blog Post - Ashutosh Karanam"
+                title = "Blog Post!"
             }
         }
 
