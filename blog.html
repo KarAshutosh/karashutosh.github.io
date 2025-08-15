@@ -606,6 +606,10 @@
                                     <input type="checkbox" id="testing" value="Security Testing">
                                     <label for="testing">Security Testing</label>
                                 </div>
+                                <div class="filter-option">
+                                    <input type="checkbox" id="bug-hunting" value="Bug Hunting">
+                                    <label for="bug-hunting">Bug Hunting</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -644,12 +648,14 @@
                 id: 1,
                 title: "Reflected XSS Filter Bypass in Search Functionality",
                 excerpt: "Two years ago, I bypassed a site's XSS filter with a simple HTML trick, executing JavaScript in the browser. Now fixed, it's a reminder that proper encoding is key.",
-                date: "2024-12-15",
+                date: "2025-08-15",
                 readTime: "15 min read",
-                severity: "Critical",
-                topics: ["XSS", "Security Testing"],
+                severity: "Medium",
+                topics: ["XSS", "Security Testing", "Bug Hunting"],
                 githubUrl: "#",
-                mediumUrl: "#"
+                mediumUrl: "https://medium.com/@yourusername/xss-filter-bypass",
+                markdownUrl: "blogs/blog1.md",
+                blogTitle: "Reflected XSS Filter Bypass in Search Functionality"
             }
         ];
 
@@ -686,6 +692,23 @@
 
             // Clear filters
             clearFilters.addEventListener('click', clearAllFilters);
+
+            // Blog card click (event delegation)
+            blogGrid.addEventListener('click', function(e) {
+                const card = e.target.closest('.blog-card');
+                if (card) {
+                    const postId = card.getAttribute('data-post-id');
+                    const post = blogPosts.find(p => p.id == postId);
+                    if (post) {
+                        // Store info in localStorage for the blog-post page
+                        localStorage.setItem('blogMarkdownUrl', post.markdownUrl);
+                        localStorage.setItem('blogMediumUrl', post.mediumUrl);
+                        localStorage.setItem('blogTitle', post.blogTitle);
+                        // Navigate to blog-post.html
+                        window.location.href = 'blog-post.html';
+                    }
+                }
+            });
         }
 
         // Search functionality
@@ -769,7 +792,7 @@
             blogCount.textContent = `Showing ${posts.length} of ${blogPosts.length} posts`;
 
             blogGrid.innerHTML = posts.map(post => `
-                <article class="blog-card fade-in">
+                <article class="blog-card fade-in" data-post-id="${post.id}" style="cursor:pointer;">
                     <div class="blog-card-header">
                         <span class="severity-badge severity-${post.severity.toLowerCase()}">${post.severity}</span>
                         <h3>${post.title}</h3>
@@ -784,11 +807,11 @@
                             ${post.topics.map(topic => `<span class="topic-tag">${topic}</span>`).join('')}
                         </div>
                         <div class="reading-options">
-                            <a href="${post.githubUrl}" class="read-link read-github" target="_blank">
+                            <a href="${post.githubUrl}" class="read-link read-github" target="_blank" onclick="event.stopPropagation();">
                                 <i class="fab fa-github"></i>
                                 Read on GitHub
                             </a>
-                            <a href="${post.mediumUrl}" class="read-link read-medium" target="_blank">
+                            <a href="${post.mediumUrl}" class="read-link read-medium" target="_blank" onclick="event.stopPropagation();">
                                 <i class="fab fa-medium"></i>
                                 Read on Medium
                             </a>

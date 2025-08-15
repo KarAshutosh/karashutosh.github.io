@@ -157,11 +157,10 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
-        // --- CONFIGURATION ---
-        // Set your markdown file URL and Medium URL here
-        const markdownUrl = "posts/sample-blog.md"; // e.g. "posts/my-blog.md"
-        const mediumUrl = "https://medium.com/@yourusername/sample-blog"; // Medium link
-        const blogTitle = "Sample Blog Post Title"; // Blog title
+        // Get values from localStorage (fallback to defaults if not present)
+        const markdownUrl = localStorage.getItem('blogMarkdownUrl') || "blogs/sample-blog.md";
+        const mediumUrl = localStorage.getItem('blogMediumUrl') || "https://medium.com/@yourusername";
+        const blogTitle = localStorage.getItem('blogTitle') || "Sample Blog Post Title";
 
         // Set title and Medium link
         document.getElementById('postTitle').textContent = blogTitle;
