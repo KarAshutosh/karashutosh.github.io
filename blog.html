@@ -695,16 +695,28 @@
 
             // Blog card click (event delegation)
             blogGrid.addEventListener('click', function(e) {
+                const githubLink = e.target.closest('.read-github');
+                if (githubLink) {
+                    const postId = githubLink.getAttribute('data-post-id');
+                    const post = blogPosts.find(p => p.id == postId);
+                    if (post) {
+                        localStorage.setItem('blogMarkdownUrl', post.markdownUrl);
+                        localStorage.setItem('blogMediumUrl', post.mediumUrl);
+                        localStorage.setItem('blogTitle', post.blogTitle);
+                        // Navigate to blog-post.html
+                        window.location.href = 'blog-post.html';
+                    }
+                    e.preventDefault();
+                    return;
+                }
                 const card = e.target.closest('.blog-card');
                 if (card) {
                     const postId = card.getAttribute('data-post-id');
                     const post = blogPosts.find(p => p.id == postId);
                     if (post) {
-                        // Store info in localStorage for the blog-post page
                         localStorage.setItem('blogMarkdownUrl', post.markdownUrl);
                         localStorage.setItem('blogMediumUrl', post.mediumUrl);
                         localStorage.setItem('blogTitle', post.blogTitle);
-                        // Navigate to blog-post.html
                         window.location.href = 'blog-post.html';
                     }
                 }
@@ -807,7 +819,7 @@
                             ${post.topics.map(topic => `<span class="topic-tag">${topic}</span>`).join('')}
                         </div>
                         <div class="reading-options">
-                            <a href="${post.githubUrl}" class="read-link read-github" target="_blank" onclick="event.stopPropagation();">
+                            <a href="#" class="read-link read-github" data-post-id="${post.id}" data-type="github">
                                 <i class="fab fa-github"></i>
                                 Read on GitHub
                             </a>
