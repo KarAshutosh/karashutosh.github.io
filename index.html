@@ -2050,12 +2050,11 @@
         const params = new URLSearchParams(window.location.search);
         const hostname = window.location.hostname;
 
-        if (window.self !== window.top) {
-            const params = new URLSearchParams(window.location.search);
-            if (params.has("site")) {
-                localStorage.setItem("siteProfile", params.get("site"));
-            }
+        if (params.has("site")) {
+            localStorage.setItem("siteProfile", params.get("site"));
         }
+
+        const siteParam = localStorage.getItem("siteProfile");
 
         let name = "";
         let title = "";
@@ -2086,7 +2085,7 @@
                 twitterLink = "https://x.com/AshutoshKaranam";
                 mediumLink = "https://kashsecurity.medium.com";
             } else {
-                name = "Ashutosh Karanam";
+                name = "Ashutosh Karanam Test";
                 footerLine = "Ashutosh Karanam. Building and deploying secure applications.";
                 title = "Ashutosh Karanam"
                 email = "ashutoshdeveloping@gmail.com";

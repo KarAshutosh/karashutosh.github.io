@@ -149,12 +149,11 @@
     </section>
     <script>
         const hostname = window.location.hostname;
-        if (window.self !== window.top) {
-            const params = new URLSearchParams(window.location.search);
-            if (params.has("site")) {
-                localStorage.setItem("siteProfile", params.get("site"));
-            }
+        
+        if (params.has("site")) {
+            localStorage.setItem("siteProfile", params.get("site"));
         }
+        const siteParam = localStorage.getItem("siteProfile");
 
         let title = "";
 
