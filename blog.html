@@ -674,6 +674,14 @@
         document.addEventListener('DOMContentLoaded', function() {
             renderBlogPosts();
             setupEventListeners();
+            if (sessionStorage.getItem('applyBugHuntingFilter') === 'true') {
+                const bugHuntingCheckbox = document.querySelector('input[type="checkbox"][value="Bug Hunting"]');
+                if (bugHuntingCheckbox && !bugHuntingCheckbox.checked) {
+                    bugHuntingCheckbox.checked = true;
+                    if (typeof handleFilter === 'function') handleFilter();
+                }
+                sessionStorage.removeItem('applyBugHuntingFilter');
+            }
         });
 
         // Event Listeners
