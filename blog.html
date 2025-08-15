@@ -869,6 +869,12 @@
     </script>
     <script>
         const hostname = window.location.hostname;
+        if (window.self !== window.top) {
+            const params = new URLSearchParams(window.location.search);
+            if (params.has("site")) {
+                localStorage.setItem("siteProfile", params.get("site"));
+            }
+        }
 
         let title = "";
 
