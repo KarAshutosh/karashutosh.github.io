@@ -150,14 +150,14 @@
     <script>
         const hostname = window.location.hostname;
         
-        let siteParam = "";
-        if (!localStorage.getItem("siteProfile")) {
+        let siteParam = localStorage.getItem("siteProfile");
+        if (!siteParam) {
             if (params.has("site")) {
-                localStorage.setItem("siteProfile", params.get("site"));
-                siteParam = localStorage.getItem("siteProfile");
+                siteParam = params.get("site");
             } else {
                 siteParam = "default";
             }
+            localStorage.setItem("siteProfile", siteParam);
         }
 
         let title = "";
