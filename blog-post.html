@@ -244,20 +244,7 @@
         const shareBtn = document.getElementById('shareBtn');
         const copyLinkBtn = document.getElementById('copyLinkBtn');
         // Share URL now only uses the blog ID
-        // const shareUrl = `${window.location.origin}${window.location.pathname}?id=${encodeURIComponent(post.id)}`;
-        
-        let shareUrl;
-        if (siteParam && siteParam.toLowerCase() === "kashsecurity") {
-            shareUrl = `https://kashsecurity.github.io/blog-post.html?id=${encodeURIComponent(post.id)}`;
-        } else if (siteParam && siteParam.toLowerCase() === "karashutosh") {
-            shareUrl = `https://karashutosh.github.io/blog-post.html?id=${encodeURIComponent(post.id)}`;
-        } else if (hostname.includes("kashsecurity.github.io")) {
-            shareUrl = `https://kashsecurity.github.io/blog-post.html?id=${encodeURIComponent(post.id)}`;
-        } else if (hostname.includes("karashutosh.github.io")) {
-            shareUrl = `https://karashutosh.github.io/blog-post.html?id=${encodeURIComponent(post.id)}`;
-        } else {
-            shareUrl = `${window.location.origin}${window.location.pathname}?id=${encodeURIComponent(post.id)}`;
-        }
+        const shareUrl = `${window.location.origin}${window.location.pathname}?id=${encodeURIComponent(post.id)}`;
 
         shareBtn.addEventListener('click', async () => {
             if (navigator.share) {
