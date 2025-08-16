@@ -271,7 +271,7 @@
         // });
 
         const shareUrl = `${window.location.origin}${window.location.pathname}?id=${encodeURIComponent(post.id)}`;
-        const inIframe = (window.self !== window.top);
+        const inIframe = window.location !== window.parent.location;
 
         shareBtn.addEventListener('click', async () => {
             if (inIframe) {
