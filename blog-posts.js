@@ -27,15 +27,15 @@ window.blogPosts = [
     },
     {
         id: 3,
-        title: "The architecture of Google Chrome",
+        title: "The Architecture of Google Chrome",
         excerpt: "An in-depth look at the design and structure of the Google Chrome browser.",
         date: "coming soon",
         readTime: "3 min read",
         severity: "Informational",
-        topics: ["Application Security", "Architecture", "Internals"],
+        topics: ["Architecture", "Software", "Internals"],
         githubUrl: "blog-post.html?id=3",
         mediumUrl: "https://kashsecurity.medium.com/reflected-xss-filter-bypass-in-search-functionality-be2d511e7621",
         markdownUrl: "blogs/blog3.md",
-        blogTitle: "The architecture of Google Chrome"
+        blogTitle: "The Architecture of Google Chrome"
     }
 ];

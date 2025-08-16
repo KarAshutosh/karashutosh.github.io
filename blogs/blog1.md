@@ -120,4 +120,4 @@ A **simple HTML encoding step** (converting `<` to `&lt;`, `>` to `&gt;`, and so
 ---
 
 Follow me for more security write-ups:
-[X/Twitter](https://x.com/KAshSecurity) | 📺 [YouTube](https://www.youtube.com/@SecurityWithKAsh) | 💻 [GitHub](https://github.com/KAshSecurity)
+[X/Twitter](https://x.com/KAshSecurity) | [YouTube](https://www.youtube.com/@SecurityWithKAsh) | [GitHub](https://github.com/KAshSecurity)
