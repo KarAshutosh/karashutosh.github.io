@@ -28,13 +28,13 @@ window.blogPosts = [
     {
         id: 3,
         title: "The Architecture of Google Chrome",
-        excerpt: "An in-depth look at the design and structure of the Google Chrome browser.",
-        date: "coming soon",
-        readTime: "3 min read",
+        excerpt: "Chrome is a multi-process system built for security, speed, and stability. This blog unpacks its architecture, from navigation to rendering and input.",
+        date: "2025-08-16",
+        readTime: "7 min read",
         severity: "Informational",
         topics: ["Architecture", "Software", "Internals"],
         githubUrl: "blog-post.html?id=3",
-        mediumUrl: "https://kashsecurity.medium.com/reflected-xss-filter-bypass-in-search-functionality-be2d511e7621",
+        mediumUrl: "https://kashsecurity.medium.com/the-architecture-of-google-chrome-e943c20929f0",
         markdownUrl: "blogs/blog3.md",
         blogTitle: "The Architecture of Google Chrome"
     }
