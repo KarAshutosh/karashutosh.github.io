@@ -14,16 +14,16 @@ window.blogPosts = [
     },
     {
         id: 2,
-        title: "Linux hardening for web servers",
-        excerpt: "Two years ago, I bypassed a site's XSS filter with a simple HTML trick, executing JavaScript in the browser. Now fixed, it's a reminder that proper encoding is key.",
-        date: "coming soon",
-        readTime: "3 min read",
+        title: "Linux Hardening Guide for Ubuntu 22.04 LTS",
+        excerpt: "Secure your Ubuntu 22.04 system with practical tips on updates, SSH, firewalls, and file permissions and more.",
+        date: "2025-08-16",
+        readTime: "18 min read",
         severity: "Informational",
-        topics: ["XSS", "Security Testing", "Bug Hunting"],
-        githubUrl: "blog-post.html?id=1",
-        mediumUrl: "https://kashsecurity.medium.com/reflected-xss-filter-bypass-in-search-functionality-be2d511e7621",
-        markdownUrl: "blogs/blog1.md",
-        blogTitle: "Linux hardening for web servers"
+        topics: ["Linux", "Defence", "Application Security"],
+        githubUrl: "blog-post.html?id=2",
+        mediumUrl: "https://kashsecurity.medium.com/linux-hardening-guide-for-ubuntu-22-04-lts-bf27065bd82c",
+        markdownUrl: "blogs/blog2.md",
+        blogTitle: "Linux Hardening Guide for Ubuntu 22.04 LTS"
     },
     {
         id: 3,
