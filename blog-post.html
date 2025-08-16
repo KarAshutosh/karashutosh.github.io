@@ -275,8 +275,7 @@
 
         shareBtn.addEventListener('click', async () => {
             if (inIframe) {
-                // If inside iframe, just display the link
-                shareBtn.textContent = shareUrl;
+                window.open(shareUrl, "_blank");
             } else if (navigator.share) {
                 try {
                     await navigator.share({
@@ -296,7 +295,7 @@
         copyLinkBtn.addEventListener('click', function(e) {
             e.preventDefault();
             if (inIframe) {
-                copyLinkBtn.textContent = shareUrl;
+                window.open(shareUrl, "_blank");
             } else {
                 navigator.clipboard.writeText(shareUrl);
                 copyLinkBtn.textContent = "Copied!";
