@@ -244,10 +244,40 @@
         const shareBtn = document.getElementById('shareBtn');
         const copyLinkBtn = document.getElementById('copyLinkBtn');
         // Share URL now only uses the blog ID
+        // const shareUrl = `${window.location.origin}${window.location.pathname}?id=${encodeURIComponent(post.id)}`;
+
+        // shareBtn.addEventListener('click', async () => {
+        //     if (navigator.share) {
+        //         try {
+        //             await navigator.share({
+        //                 title: post.blogTitle,
+        //                 url: shareUrl
+        //             });
+        //         } catch (e) {
+        //             // User cancelled or error
+        //         }
+        //     } else {
+        //         navigator.clipboard.writeText(shareUrl);
+        //         shareBtn.textContent = "Link Copied!";
+        //         setTimeout(() => shareBtn.innerHTML = '<i class="fas fa-share-alt"></i> Share', 1500);
+        //     }
+        // });
+
+        // copyLinkBtn.addEventListener('click', function(e) {
+        //     e.preventDefault();
+        //     navigator.clipboard.writeText(shareUrl);
+        //     copyLinkBtn.textContent = "Copied!";
+        //     setTimeout(() => copyLinkBtn.innerHTML = '<i class="fas fa-link"></i> Copy Link', 1500);
+        // });
+
         const shareUrl = `${window.location.origin}${window.location.pathname}?id=${encodeURIComponent(post.id)}`;
+        const inIframe = (window.self !== window.top);
 
         shareBtn.addEventListener('click', async () => {
-            if (navigator.share) {
+            if (inIframe) {
+                // If inside iframe, just display the link
+                shareBtn.textContent = shareUrl;
+            } else if (navigator.share) {
                 try {
                     await navigator.share({
                         title: post.blogTitle,
@@ -265,10 +295,15 @@
 
         copyLinkBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            navigator.clipboard.writeText(shareUrl);
-            copyLinkBtn.textContent = "Copied!";
-            setTimeout(() => copyLinkBtn.innerHTML = '<i class="fas fa-link"></i> Copy Link', 1500);
+            if (inIframe) {
+                copyLinkBtn.textContent = shareUrl;
+            } else {
+                navigator.clipboard.writeText(shareUrl);
+                copyLinkBtn.textContent = "Copied!";
+                setTimeout(() => copyLinkBtn.innerHTML = '<i class="fas fa-link"></i> Copy Link', 1500);
+            }
         });
+
     </script>
     <script>
         const hostname = window.location.hostname;
