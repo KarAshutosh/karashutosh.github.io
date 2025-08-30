@@ -130,6 +130,8 @@
             margin: 2rem auto 3rem auto;
             padding: 2.5rem 2rem;
             color: var(--text-dark);
+            overflow-x: auto; /* Add this to allow horizontal scroll if needed */
+            box-sizing: border-box; /* Ensure padding is included in width */
         }
         /* Markdown styles */
         .markdown-container h1, .markdown-container h2, .markdown-container h3 {
@@ -146,10 +148,15 @@
             background: #f3f4f6;
             padding: 2px 6px;
             border-radius: 4px;
+            word-break: break-all;      /* Prevent inline code from overflowing */
+            overflow-wrap: anywhere;
+            font-size: 0.97em;
         }
         .markdown-container a {
             color: var(--accent-color);
             text-decoration: underline;
+            word-break: break-all;      /* Allow long URLs to wrap */
+            overflow-wrap: anywhere;    /* Break long links if needed */
         }
         .markdown-container img {
             max-width: 100%;
