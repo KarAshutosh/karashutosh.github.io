@@ -1123,12 +1123,107 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Hamburger styles */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1100;
+            padding: 0.5rem;
+            margin-left: 1rem;
+        }
+
+        .hamburger {
+            width: 28px;
+            height: 3px;
+            background: var(--primary-color);
+            display: block;
+            position: relative;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .hamburger::before,
+        .hamburger::after {
+            content: '';
+            width: 28px;
+            height: 3px;
+            background: var(--primary-color);
+            position: absolute;
+            left: 0;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .hamburger::before {
+            top: -9px;
+        }
+
+        .hamburger::after {
+            top: 9px;
+        }
+
+        /* Responsive nav */
+        @media (max-width: 900px) {
+            nav.container {
+                flex-wrap: wrap;
+            }
+            .nav-toggle {
+                display: block;
+            }
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                left: 0;
+                background: var(--bg-card);
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0;
+                width: 100%;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+                display: none;
+                padding: 1rem 0;
+                z-index: 1001;
+            }
+            .nav-links.open {
+                display: flex;
+                animation: fadeInNav 0.2s;
+            }
+            .nav-links li {
+                width: 100%;
+            }
+            .nav-links a {
+                display: block;
+                width: 100%;
+                padding: 1rem 2rem;
+                color: var(--text-dark);
+                border-bottom: 1px solid var(--border-color);
+            }
+            .nav-links a:last-child {
+                border-bottom: none;
+            }
+            .logo {
+                z-index: 1101;
+            }
+        }
+
+        @keyframes fadeInNav {
+            from { opacity: 0; transform: translateY(-10px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
     </style>
 </head>
 <body>
     <header>
         <nav class="container">
             <div class="logo">SecureCode</div>
+            <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="blog.html">Blog</a></li>
@@ -2145,5 +2240,26 @@
     
         window.parent.postMessage({ iframeTitle: document.title }, "*");
     </script>
+        
+    <script>
+    // Responsive nav toggle
+    document.addEventListener('DOMContentLoaded', function() {
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        navToggle.addEventListener('click', function() {
+            const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+            navToggle.setAttribute('aria-expanded', !expanded);
+            navLinks.classList.toggle('open');
+        });
+        // Optional: close menu when a link is clicked (for better UX)
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+                navToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+    });
+    </script>
+
 </body>
 </html>
