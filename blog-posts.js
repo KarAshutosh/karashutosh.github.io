@@ -37,5 +37,18 @@ window.blogPosts = [
         mediumUrl: "https://kashsecurity.medium.com/the-architecture-of-google-chrome-e943c20929f0",
         markdownUrl: "blogs/blog3.md",
         blogTitle: "The Architecture of Google Chrome"
+    },
+    {
+        id: 4,
+        title: "OWASP Juice Shop Challenge Solutions",
+        excerpt: "This blog provides solutions to the OWASP Juice Shop challenges, covering various aspects of web application security.",
+        date: "2025-08-31",
+        readTime: "80 min read",
+        severity: "Informational",
+        topics: ["Software", "Application Security", "Secure Coding", "Defence"],
+        githubUrl: "blog-post.html?id=4",
+        mediumUrl: "coming-soon.html",
+        markdownUrl: "blogs/blog4.md",
+        blogTitle: "OWASP Juice Shop Challenge Solutions"
     }
 ];
