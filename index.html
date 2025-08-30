@@ -2159,18 +2159,24 @@
     
     <script>
 
-        const params = new URLSearchParams(window.location.search);
+        // const params = new URLSearchParams(window.location.search);
         const hostname = window.location.hostname;
 
-        let siteParam = localStorage.getItem("siteProfile");
-        if (!siteParam) {
-            if (params.has("site")) {
-                siteParam = params.get("site");
-            } else {
-                siteParam = "default";
-            }
-            localStorage.setItem("siteProfile", siteParam);
-        }
+        // let siteParam = localStorage.getItem("siteProfile");
+        // if (!siteParam) {
+        //     if (params.has("site")) {
+        //         siteParam = params.get("site");
+        //     } else {
+        //         if (hostname === "kashsecurity.github.io") {
+        //             siteParam = "kashsecurity";
+        //         } else if (hostname === "karashutosh.github.io") {
+        //             siteParam = "karashutosh";
+        //         } else {
+        //             siteParam = "default";
+        //         }
+        //     }
+        //     localStorage.setItem("siteProfile", siteParam);
+        // }
 
         let name = "";
         let title = "";
@@ -2181,45 +2187,74 @@
         let twitterLink = "";
         let mediumLink = "";
 
-        function setProfile(profile) {
-            if (profile === "kashsecurity") {
-                name = "K Ash Security";
-                footerLine = "K Ash Security. Building and deploying secure applications.";
-                title = "K Ash Security - Cybersecurity Engineer";
-                email = "ashutoshdeveloping@gmail.com";
-                linkedinLink = "https://linkedin.com/in/karanamashutosh";
-                gitHubLink = "https://github.com/KAshSecurity/";
-                twitterLink = "https://x.com/KAshSecurity";
-                mediumLink = "https://kashsecurity.medium.com";
-            } else if (profile === "karashutosh") {
-                name = "Ashutosh Karanam";
-                footerLine = "Ashutosh Karanam. Building and deploying secure applications.";
-                title = "Ashutosh Karanam - Cybersecurity Engineer";
-                email = "ashutoshdeveloping@gmail.com";
-                linkedinLink = "https://linkedin.com/in/karanamashutosh";
-                gitHubLink = "https://github.com/KarAshutosh/";
-                twitterLink = "https://x.com/AshutoshKaranam";
-                mediumLink = "https://kashsecurity.medium.com";
-            } else {
-                name = "Ashutosh Karanam";
-                footerLine = "Ashutosh Karanam. Building and deploying secure applications.";
-                title = "Ashutosh Karanam - Cybersecurity Engineer";
-                email = "ashutoshdeveloping@gmail.com";
-                linkedinLink = "https://linkedin.com/in/karanamashutosh";
-                gitHubLink = "https://github.com/KarAshutosh/";
-                twitterLink = "https://x.com/AshutoshKaranam";
-                mediumLink = "https://kashsecurity.medium.com";
-            }
-        }
+        // function setProfile(profile) {
+        //     if (profile === "kashsecurity") {
+        //         name = "K Ash Security";
+        //         footerLine = "K Ash Security. Building and deploying secure applications.";
+        //         title = "K Ash Security - Cybersecurity Engineer";
+        //         email = "ashutoshdeveloping@gmail.com";
+        //         linkedinLink = "https://linkedin.com/in/karanamashutosh";
+        //         gitHubLink = "https://github.com/KAshSecurity/";
+        //         twitterLink = "https://x.com/KAshSecurity";
+        //         mediumLink = "https://kashsecurity.medium.com";
+        //     } else if (profile === "karashutosh") {
+        //         name = "Ashutosh Karanam";
+        //         footerLine = "Ashutosh Karanam. Building and deploying secure applications.";
+        //         title = "Ashutosh Karanam - Cybersecurity Engineer";
+        //         email = "ashutoshdeveloping@gmail.com";
+        //         linkedinLink = "https://linkedin.com/in/karanamashutosh";
+        //         gitHubLink = "https://github.com/KarAshutosh/";
+        //         twitterLink = "https://x.com/AshutoshKaranam";
+        //         mediumLink = "https://kashsecurity.medium.com";
+        //     } else {
+        //         name = "Ashutosh Karanam Test";
+        //         footerLine = "Ashutosh Karanam. Building and deploying secure applications.";
+        //         title = "Ashutosh Karanam - Cybersecurity Engineer";
+        //         email = "ashutoshdeveloping@gmail.com";
+        //         linkedinLink = "https://linkedin.com/in/karanamashutosh";
+        //         gitHubLink = "https://github.com/KarAshutosh/";
+        //         twitterLink = "https://x.com/AshutoshKaranam";
+        //         mediumLink = "https://kashsecurity.medium.com";
+        //     }
+        // }
 
-        if (siteParam) {
-            setProfile(siteParam.toLowerCase());
-        } else if (hostname.includes("kashsecurity.github.io")) {
-            setProfile("kashsecurity");
+        // if (siteParam) {
+        //     setProfile(siteParam.toLowerCase());
+        // } else if (hostname.includes("kashsecurity.github.io")) {
+        //     setProfile("kashsecurity");
+        // } else if (hostname.includes("karashutosh.github.io")) {
+        //     setProfile("karashutosh");
+        // } else {
+        //     setProfile("");
+        // }
+
+        if (hostname.includes("kashsecurity.github.io")) {
+            name = "K Ash Security";
+            footerLine = "K Ash Security. Building and deploying secure applications.";
+            title = "K Ash Security - Cybersecurity Engineer";
+            email = "ashutoshdeveloping@gmail.com";
+            linkedinLink = "https://linkedin.com/in/karanamashutosh";
+            gitHubLink = "https://github.com/KAshSecurity/";
+            twitterLink = "https://x.com/KAshSecurity";
+            mediumLink = "https://kashsecurity.medium.com";
         } else if (hostname.includes("karashutosh.github.io")) {
-            setProfile("karashutosh");
+            name = "Ashutosh Karanam";
+            footerLine = "Ashutosh Karanam. Building and deploying secure applications.";
+            title = "Ashutosh Karanam - Cybersecurity Engineer";
+            email = "ashutoshdeveloping@gmail.com";
+            linkedinLink = "https://linkedin.com/in/karanamashutosh";
+            gitHubLink = "https://github.com/KarAshutosh/";
+            twitterLink = "https://x.com/AshutoshKaranam";
+            mediumLink = "https://kashsecurity.medium.com";
         } else {
-            setProfile("");
+            name = "Ashutosh Karanam Test";
+            footerLine = "Ashutosh Karanam. Building and deploying secure applications.";
+            title = "Ashutosh Karanam - Cybersecurity Engineer";
+            email = "ashutoshdeveloping@gmail.com";
+            linkedinLink = "https://linkedin.com/in/karanamashutosh";
+            gitHubLink = "https://github.com/KarAshutosh/";
+            twitterLink = "https://x.com/AshutoshKaranam";
+            mediumLink = "https://kashsecurity.medium.com";
         }
 
         document.getElementById("name").textContent = name;

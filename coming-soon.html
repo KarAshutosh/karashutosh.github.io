@@ -248,36 +248,44 @@
     <script>
         const hostname = window.location.hostname;
         
-        let siteParam = localStorage.getItem("siteProfile");
-        if (!siteParam) {
-            if (params.has("site")) {
-                siteParam = params.get("site");
-            } else {
-                siteParam = "default";
-            }
-            localStorage.setItem("siteProfile", siteParam);
-        }
+        // let siteParam = localStorage.getItem("siteProfile");
+        // if (!siteParam) {
+        //     if (params.has("site")) {
+        //         siteParam = params.get("site");
+        //     } else {
+        //         siteParam = "default";
+        //     }
+        //     localStorage.setItem("siteProfile", siteParam);
+        // }
 
         let title = "";
 
-        function setProfile(profile) {
-            if (profile === "kashsecurity") {
-                title = "Coming Soon - K Ash Security"
-            } else if (profile === "karashutosh") {
-                title = "Coming Soon - Ashutosh Karanam"
-            } else {
-                title = "Coming Soon - Ashutosh Karanam"
-            }
-        }
+        // function setProfile(profile) {
+        //     if (profile === "kashsecurity") {
+        //         title = "Coming Soon - K Ash Security"
+        //     } else if (profile === "karashutosh") {
+        //         title = "Coming Soon - Ashutosh Karanam"
+        //     } else {
+        //         title = "Coming Soon - Ashutosh Karanam"
+        //     }
+        // }
 
-        if (siteParam) {
-            setProfile(siteParam.toLowerCase());
-        } else if (hostname.includes("kashsecurity.github.io")) {
-            setProfile("kashsecurity");
+        // if (siteParam) {
+        //     setProfile(siteParam.toLowerCase());
+        // } else if (hostname.includes("kashsecurity.github.io")) {
+        //     setProfile("kashsecurity");
+        // } else if (hostname.includes("karashutosh.github.io")) {
+        //     setProfile("karashutosh");
+        // } else {
+        //     setProfile("");
+        // }
+
+        if (hostname.includes("kashsecurity.github.io")) {
+            title = "Coming Soon - K Ash Security"
         } else if (hostname.includes("karashutosh.github.io")) {
-            setProfile("karashutosh");
+            title = "Coming Soon - Ashutosh Karanam"
         } else {
-            setProfile("");
+            title = "Coming Soon - Ashutosh Karanam Test"
         }
 
         document.getElementById("title").textContent = title;
