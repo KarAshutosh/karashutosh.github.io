@@ -27,6 +27,11 @@
             display: flex;
             flex-direction: column;
         }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
         header {
             background: var(--bg-card);
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
@@ -41,8 +46,6 @@
             align-items: center;
             padding: 1rem 0;
             height: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
         }
         .logo {
             font-size: 1.5rem;
@@ -217,7 +220,7 @@
 </head>
 <body>
     <header>
-        <nav>
+        <nav class="container">
             <a href="index.html" class="logo">SecureCode</a>
             <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">
                 <span class="hamburger"></span>
