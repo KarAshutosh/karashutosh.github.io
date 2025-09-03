@@ -23,7 +23,7 @@
 
 ## Introduction to Linux Hardening
 
-**Linux hardening** encompasses configuring the OS and its services to minimize vulnerabilities and reduce attack surfaces—preventing breaches and unauthorized access.
+**Linux hardening** encompasses configuring the OS and its services to minimize vulnerabilities and reduce attack surfaces, preventing breaches and unauthorized access.
 
 ---
 
@@ -115,7 +115,7 @@ By systematically hardening servers, organizations build a strong security found
 
 ## User & Group Management
 
-Absolutely! Let’s go **command by command**, explaining what it does, why it’s used, and the security reasoning behind it. I’ll go section by section from the merged document.
+Absolutely! Let's go **command by command**, explaining what it does, why it's used, and the security reasoning behind it. I'll go section by section from the merged document.
 
 
 ### Listing Users
@@ -131,7 +131,7 @@ cut -d: -f1 /etc/passwd
   - `cut` extracts specific fields from a text file.
   - `-d:` sets the delimiter to `:` (colon), which separates fields in `/etc/passwd`.
   - `-f1` selects the first field, which is the username.
-- **Why it’s used:**
+- **Why it's used:**
 
   - To get a list of all user accounts on the system. Useful for auditing accounts and identifying unused or unexpected users.
 
@@ -147,7 +147,7 @@ awk -F: '($3 == "0") {print}' /etc/passwd
   - `awk` processes text line by line.
   - `-F:` sets the field separator to `:`.
   - `($3 == "0") {print}` prints lines where the 3rd field (UID) equals 0.
-- **Why it’s used:**
+- **Why it's used:**
 
   - UID 0 means root-level privileges. This command checks if there are any users other than `root` with full administrative access.
   - Helps detect privilege escalation risks.
@@ -164,7 +164,7 @@ sudo adduser newuser
 - **What it does:**
 
   - Creates a new user account interactively, asking for password and optional user details.
-- **Why it’s used:**
+- **Why it's used:**
 
   - Adds users securely while automatically creating home directories and necessary default settings.
 
@@ -178,7 +178,7 @@ sudo passwd -l root
 - **What it does:**
 
   - Locks the password for the `root` account, preventing direct password login.
-- **Why it’s used:**
+- **Why it's used:**
 
   - Forces administrators to use `sudo` instead of logging in as root directly, reducing the risk of full system compromise.
 
@@ -201,7 +201,7 @@ sudo awk -F: '{print $1}' /etc/passwd
 - **What it does:**
 
   - Prints the first field (username) from every line in `/etc/passwd`.
-- **Why it’s used:**
+- **Why it's used:**
 
   - Allows administrators to audit all accounts and identify users that are no longer needed.
 
@@ -214,7 +214,7 @@ sudo deluser username
 - **What it does:**
 
   - Removes a user from the system, optionally deleting their home directory.
-- **Why it’s used:**
+- **Why it's used:**
 
   - Reduces attack surface by removing unused accounts that could be exploited.
 
@@ -229,7 +229,7 @@ sudo usermod -L username
 
   - Locks the specified user account.
   - Prevents password login without deleting the account.
-- **Why it’s used:**
+- **Why it's used:**
 
   - Useful for temporarily disabling accounts without losing user data.
 
@@ -251,7 +251,7 @@ PASS_MIN_LEN    12
   - `PASS_WARN_AGE`: Days before expiry to warn the user.
   - `PASS_MIN_LEN`: Minimum password length.
 
-- **Why it’s used:**
+- **Why it's used:**
 
   - Ensures passwords are regularly changed and meet a baseline length, which reduces risk from weak or compromised passwords.
 
@@ -264,7 +264,7 @@ sudo apt install libpam-pwquality -y
 - **What it does:**
 
   - Installs the PAM module `libpam-pwquality` for enforcing password complexity rules.
-- **Why it’s used:**
+- **Why it's used:**
 
   - Strengthens passwords by requiring combinations of upper/lowercase letters, digits, and special characters.
 
@@ -282,7 +282,7 @@ password requisite pam_pwquality.so retry=3 minlen=12 dcredit=-1 ucredit=-1 ocre
     - `retry=3`: Allows 3 attempts to enter a valid password.
     - `minlen=12`: Minimum length 12 characters.
     - `dcredit=-1, ucredit=-1, ocredit=-1, lcredit=-1`: Requires at least one digit, uppercase, other (special), and lowercase letter.
-- **Why it’s used:**
+- **Why it's used:**
   - Prevents weak passwords and enforces complexity policies for system security.
 
 
@@ -297,7 +297,7 @@ sudo apt install libpam-google-authenticator
 - **What it does:**
 
   - Installs the PAM module for Google Authenticator-based MFA.
-- **Why it’s used:**
+- **Why it's used:**
 
   - Adds a second authentication factor, requiring both a password and a time-based one-time code, improving login security.
 
@@ -311,7 +311,7 @@ google-authenticator
 
   - Runs the setup for MFA for a specific user.
   - Generates QR codes, secret keys, and recovery codes.
-- **Why it’s used:**
+- **Why it's used:**
   - Links the user account to a Google Authenticator app or compatible TOTP app.
 
 
@@ -324,11 +324,11 @@ auth required pam_google_authenticator.so
 - **What it does:**
 
   - Tells SSH to require MFA authentication for logins.
-- **Why it’s used:**
+- **Why it's used:**
 
   - Forces all SSH logins to require the one-time code, reducing risk from password theft.
 
-Here’s a **fully merged and comprehensive SSH Hardening section**, combining all your sources without missing any details:
+Here's a **fully merged and comprehensive SSH Hardening section**, combining all your sources without missing any details:
 
 
 ---
@@ -402,7 +402,7 @@ ssh-keygen -t ed25519 -a 100
 
 **Deploy public key:**
 
-- Copy the public key to the server’s user account:
+- Copy the public key to the server's user account:
 
 ```bash
 ~/.ssh/authorized_keys
@@ -504,7 +504,7 @@ MACs hmac-sha2-256-etm@openssh.com
 sudo systemctl restart sshd
 ```
 
-Here’s a **fully merged and comprehensive “File System & Permission Security” section**, combining all your sources without missing anything:
+Here's a **fully merged and comprehensive "File System & Permission Security" section**, combining all your sources without missing anything:
 
 
 ---
@@ -597,7 +597,7 @@ sudo cryptsetup luksFormat /dev/sdX
   - For existing installations, follow advanced guides to migrate data to LUKS-encrypted volumes.
 
 
-Here’s a **fully merged and comprehensive “Firewall & Network Security” section**, combining all your sources without missing anything:
+Here's a **fully merged and comprehensive "Firewall & Network Security" section**, combining all your sources without missing anything:
 
 ---
 
@@ -639,7 +639,7 @@ sudo ufw status verbose          # Check current rules
 - **Why:**
 
   - Reduces attack surface by allowing only required services.
-  - Denying everything by default ensures unintentional services aren’t exposed.
+  - Denying everything by default ensures unintentional services aren't exposed.
 
 
 ### Enable Logging
@@ -704,10 +704,10 @@ sudo iptables-save > /etc/iptables/rules.v4
 
 - **Why:**
 
-  - Useful for fine-tuned rules, rate-limiting, and temporary blocks beyond UFW’s scope.
+  - Useful for fine-tuned rules, rate-limiting, and temporary blocks beyond UFW's scope.
 
 
-Here’s a **fully merged and comprehensive “Service & Process Hardening” section**, combining all your sources without missing anything:
+Here's a **fully merged and comprehensive "Service & Process Hardening" section**, combining all your sources without missing anything:
 
 ---
 
@@ -1207,7 +1207,7 @@ sudo oscap xccdf eval --profile <profile_id> --report report.html /usr/share/xml
 - Keep up to date with security advisories and patches.
 - Use **layered security**: combine OS hardening, audit, kernel tweaks, app security, backup, and compliance.
 
-By implementing the measures above, Ubuntu 22.04 LTS servers can be robustly defended against contemporary attacks and misconfigurations—supporting secure production workloads and regulatory compliance.
+By implementing the measures above, Ubuntu 22.04 LTS servers can be robustly defended against contemporary attacks and misconfigurations, supporting secure production workloads and regulatory compliance.
 
 ---
 

@@ -2,9 +2,9 @@
 # Reflected XSS Filter Bypass in Search Functionality
 
 Two years ago, while testing a web application, I discovered an interesting **Reflected Cross-Site Scripting (XSS)** vulnerability.
-The site had some filtering in place, but with a bit of creative input crafting, it was possible to bypass the protection and execute arbitrary JavaScript in a victim’s browser.
+The site had some filtering in place, but with a bit of creative input crafting, it was possible to bypass the protection and execute arbitrary JavaScript in a victim's browser.
 
-The vulnerability has since been **fixed**, but I’m sharing the details here for educational purposes and to highlight a common sanitization oversight.
+The vulnerability has since been **fixed**, but I'm sharing the details here for educational purposes and to highlight a common sanitization oversight.
 
 ---
 
@@ -12,7 +12,7 @@ The vulnerability has since been **fixed**, but I’m sharing the details here f
 
 Reflected XSS occurs when user-supplied data is immediately included in a server response without proper sanitization or encoding.
 Attackers can inject malicious JavaScript into a URL, tricking a victim into clicking it.
-When the victim’s browser loads the page, the script runs with the same permissions as the legitimate site.
+When the victim's browser loads the page, the script runs with the same permissions as the legitimate site.
 
 ---
 
@@ -26,10 +26,10 @@ The vulnerable parameter was found in the **search** functionality.
 
 ## The Filter Problem
 
-At the time, the site’s filter removed HTML tags enclosed in `< >`.
+At the time, the site's filter removed HTML tags enclosed in `< >`.
 However, the filter made a critical assumption: it only stripped tags if both the **opening `<` and closing `>`** were present.
 
-This meant that if the closing `>` was omitted and replaced with `/<`, the filter’s rule could be bypassed while the browser still interpreted the tag.
+This meant that if the closing `>` was omitted and replaced with `/<`, the filter's rule could be bypassed while the browser still interpreted the tag.
 
 ---
 
@@ -41,7 +41,7 @@ I chose to inject an `<input>` element because:
 * It can be made to auto-focus when the page loads, ensuring the payload executes without user interaction.
 * It blends into the page without raising suspicion.
 
-Here’s the payload:
+Here's the payload:
 
 ```html
 <input type="text" id="search-text" name="query" value="" onfocus="alert(1)" autofocus="" /<
@@ -55,7 +55,7 @@ Here’s the payload:
 * `value=""` → Keeps the field empty.
 * `onfocus="alert(1)"` → Proof-of-concept payload (can be replaced with malicious JavaScript).
 * `autofocus=""` → Automatically focuses the input, triggering the payload immediately.
-* `/ <` → Filter bypass — prevents the filter from removing the tag while still being parsed by the browser.
+* `/ <` → Filter bypass, prevents the filter from removing the tag while still being parsed by the browser.
 
 ---
 
@@ -73,7 +73,7 @@ When the page loaded, the injected input field automatically gained focus and tr
 
 ## Disclosure Timeline
 
-* **July 10, 2023** — Reported the vulnerability on HackerOne.
+* **July 10, 2023** - Reported the vulnerability on HackerOne.
 * The issue was **acknowledged** but marked as a **duplicate**, indicating it had already been reported by another researcher.
 * The vulnerability has since been **patched and is no longer exploitable**.
 
@@ -109,11 +109,11 @@ For authenticated sessions, this could have meant full account takeover.
 
 ## Final Thoughts
 
-This vulnerability is a textbook example of why **partial sanitization isn’t enough**.
+This vulnerability is a textbook example of why **partial sanitization isn't enough**.
 Even if you remove dangerous tags, creative payload construction can bypass naive filters.
 
 In this case, overlooking incomplete HTML tags allowed full XSS exploitation.
-Security controls must be designed with **browser parsing behavior** in mind — not just what the filter “expects.”
+Security controls must be designed with **browser parsing behavior** in mind, not just what the filter "expects."
 
 A **simple HTML encoding step** (converting `<` to `&lt;`, `>` to `&gt;`, and so on) would have completely prevented this attack in the first place.
 

@@ -2,10 +2,10 @@
 
 ## 1. Architectural Overview: Processes, Threads, Sandboxing
 
-Modern Chrome is not “one big process.” It’s a system of cooperating processes connected by IPC, arranged to optimize **fault isolation**, **security**, and **responsiveness**:
+Modern Chrome is not "one big process." It's a system of cooperating processes connected by IPC, arranged to optimize **fault isolation**, **security**, and **responsiveness**:
 
-* **Browser process** (a.k.a. the “chrome” of Chrome): owns privileged capabilities and global coordination—UI (tabs, omnibox), networking stack, disk/storage, permissions. It brokers access to OS resources and orchestrates navigation and lifecycle.
-* **Renderer processes**: untrusted, sandboxed workers that host a single site (or site-tree) worth of web content—HTML/CSS/JS parsing & execution, layout, painting, compositing. Chrome prefers *site-per-process* (including cross-site iframes via **Site Isolation**) rather than tab-per-process.
+* **Browser process** (a.k.a. the "chrome" of Chrome): owns privileged capabilities and global coordination, UI (tabs, omnibox), networking stack, disk/storage, permissions. It brokers access to OS resources and orchestrates navigation and lifecycle.
+* **Renderer processes**: untrusted, sandboxed workers that host a single site (or site-tree) worth of web content, HTML/CSS/JS parsing & execution, layout, painting, compositing. Chrome prefers *site-per-process* (including cross-site iframes via **Site Isolation**) rather than tab-per-process.
 * **GPU process**: aggregates GPU access from multiple clients and executes compositing and raster work on the device safely, isolated from renderers.
 * **Others**: extensions, utility, plugin (historical Flash) processes show up depending on features/extensions in play.
 
@@ -16,10 +16,10 @@ Modern Chrome is not “one big process.” It’s a system of cooperating proce
 3. Trade-off: each process carries its own heap and runtime (e.g., V8), which increases memory. Chrome therefore caps process counts and can consolidate when resource constrained. **Servicification** lets the browser process split/merge internal services across processes to fit device budgets.
 
 **Security hardening: Site Isolation**
-Cross-site iframes get their **own renderer process**. This aligns with the web’s core security boundary (Same-Origin Policy) and became more urgent post-Spectre/Meltdown. Consequence: even “simple” features like Find in Page or DevTools must fan out across multiple renderers. 
+Cross-site iframes get their **own renderer process**. This aligns with the web's core security boundary (Same-Origin Policy) and became more urgent post-Spectre/Meltdown. Consequence: even "simple" features like Find in Page or DevTools must fan out across multiple renderers. 
 
 > Takeaway
-> Treat “a page” as a *graph of processes*, not a single JS world. When you design features that depend on frame messaging (e.g., analytics pings, embedded editors), architect assuming **per-frame process boundaries**.
+> Treat "a page" as a *graph of processes*, not a single JS world. When you design features that depend on frame messaging (e.g., analytics pings, embedded editors), architect assuming **per-frame process boundaries**.
 
 ---
 
@@ -31,7 +31,7 @@ A user hits Enter. What actually happens?
 2. **Network start** (Browser/Network thread): DNS, TLS, request dispatch. Handles 30x redirects before content streaming begins.
 3. **Response classification** (Browser/Network): determine resource type primarily via `Content-Type`, but fall back to **MIME sniffing** if needed; gate dangerous responses with **Safe Browsing**; enforce **CORB** to keep sensitive cross-origin resources from reaching renderers. If the response is a download, hand off to the download manager instead of the renderer.
 4. **Renderer selection** (Browser/UI): pre-warm or pick a renderer (often already queued in parallel with the request) appropriate for the destination site (and frame). 
-5. **Commit** (Browser → Renderer IPC): hand over the data stream; upon renderer’s ACK, the address bar/security state/history update; renderer begins document loading. Only after all frames’ `load` events complete does the browser stop the spinner (client JS may still stream more work).
+5. **Commit** (Browser → Renderer IPC): hand over the data stream; upon renderer's ACK, the address bar/security state/history update; renderer begins document loading. Only after all frames' `load` events complete does the browser stop the spinner (client JS may still stream more work).
 
 **Special cases**
 
@@ -41,7 +41,7 @@ A user hits Enter. What actually happens?
 > Takeaways
 >
 > * Late `beforeunload` handlers add **latent round-trips** to every nav; use only when absolutely necessary.
-> * If SW sometimes passes through to network, enable **Navigation Preload** so you’re not paying SW startup + network sequentially.
+> * If SW sometimes passes through to network, enable **Navigation Preload** so you're not paying SW startup + network sequentially.
 
 ---
 
@@ -62,7 +62,7 @@ Each renderer hosts several key threads:
 
 ### Style calculation
 
-* CSSOM + DOM → **computed styles** per element. Even with no author CSS, UA styles apply (visible in DevTools’ “Computed” panel).
+* CSSOM + DOM → **computed styles** per element. Even with no author CSS, UA styles apply (visible in DevTools' "Computed" panel).
 
 ### Layout (aka reflow)
 
@@ -74,7 +74,7 @@ Each renderer hosts several key threads:
 
 ### Compositing, tiles, and frames
 
-* The main thread decides **layerization** (or you hint with `will-change`). Too many layers can hurt—measure! 
+* The main thread decides **layerization** (or you hint with `will-change`). Too many layers can hurt! Measure! 
 * Compositor thread chops layers into **tiles**, prioritizes in-viewport tiles for raster, generates **draw quads**, assembles a **compositor frame**, hands it to the Browser process, which submits to **GPU** for display. This pipeline enables smooth scroll/transform animations **without** blocking on the main thread.
 
 > Takeaways
@@ -90,7 +90,7 @@ Input begins in the **Browser process** (pointer/touch/mouse/keyboard). The brow
 
 ### Fast paths vs main-thread dependency
 
-The compositor can maintain buttery scroll/zoom **as long as** it doesn’t need the main thread. Any region with an input listener becomes a **Non-Fast Scrollable Region (NFSR)**; events occurring there must be routed to the main thread before compositing proceeds. A single `document.body` catch-all listener can mark the **entire page** NFSR.
+The compositor can maintain buttery scroll/zoom **as long as** it doesn't need the main thread. Any region with an input listener becomes a **Non-Fast Scrollable Region (NFSR)**; events occurring there must be routed to the main thread before compositing proceeds. A single `document.body` catch-all listener can mark the **entire page** NFSR.
 
 **Mitigations**
 
@@ -101,11 +101,11 @@ The compositor can maintain buttery scroll/zoom **as long as** it doesn’t need
   ```
 
   This tells Chrome not to wait for your handler to decide whether to block native scrolling. Use `event.cancelable` if you truly need to `preventDefault()` selectively. Or declare intent in CSS with `touch-action: pan-x;`. ([Chrome for Developers][4])
-* **Coalescing**: Continuous events (`touchmove`, `pointermove`, `wheel`) are batched and dispatched just before the next `rAF` to avoid flooding the main thread beyond the display’s refresh rate. For high-fidelity drawing apps, use `event.getCoalescedEvents()` to recover intra-frame points. ([Chrome for Developers][4])
+* **Coalescing**: Continuous events (`touchmove`, `pointermove`, `wheel`) are batched and dispatched just before the next `rAF` to avoid flooding the main thread beyond the display's refresh rate. For high-fidelity drawing apps, use `event.getCoalescedEvents()` to recover intra-frame points. ([Chrome for Developers][4])
 
 > Takeaways
 >
-> * Avoid “global” gesture handlers unless necessary; scope listeners to interactive regions.
+> * Avoid "global" gesture handlers unless necessary; scope listeners to interactive regions.
 > * Use `passive: true` by default; opt out only when you must block native scroll. ([Chrome for Developers][4])
 
 ---
@@ -197,13 +197,13 @@ Scope listeners and default to passive; rely on `touch-action` in CSS where poss
 * **Layer count** → too high: memory pressure & compositor overhead; too low: missed compositor-only animation opportunities.
 * **Input delay** (FID/INP) → often caused by global listeners or main-thread queue congestion. Adopt passive listeners and reduce NFSR footprint.
 
-Use **Lighthouse** + **DevTools Performance** to see where you’re crossing process/thread boundaries and which stage is hot.
+Use **Lighthouse** + **DevTools Performance** to see where you're crossing process/thread boundaries and which stage is hot.
 
 ---
 
 ## 8. Closing Perspective
 
-Chrome’s architecture is explicitly designed to **decouple**: navigation/security (browser), computation of layout/paint/script (renderer), and presentation (GPU). The performance you see is the emergent property of *how your code engages each plane*. If you’re intentional about where work runs and which stages you invalidate, you’ll consistently ship experiences that feel native—because you’re cooperating with the browser’s design, not fighting it.
+Chrome's architecture is explicitly designed to **decouple**: navigation/security (browser), computation of layout/paint/script (renderer), and presentation (GPU). The performance you see is the emergent property of *how your code engages each plane*. If you're intentional about where work runs and which stages you invalidate, you'll consistently ship experiences that feel native, because you're cooperating with the browser's design, not fighting it.
 
 ---
 
