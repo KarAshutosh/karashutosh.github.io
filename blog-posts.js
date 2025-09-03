@@ -50,5 +50,18 @@ window.blogPosts = [
         mediumUrl: "coming-soon.html",
         markdownUrl: "blogs/blog4.md",
         blogTitle: "OWASP Juice Shop Challenge Solutions"
+    },
+    {
+        id: 5,
+        title: "Escaping the Sandbox: A Dependency Vulnerability RCE in OWASP Juice Shop",
+        excerpt: "How a vulnerable dependency in OWASP Juice Shop's chatbot (vm2) can be exploited for remote code execution.",
+        date: "2025-09-04",
+        readTime: "3 min read",
+        severity: "Critical",
+        topics: ["Software", "Application Security", "Secure Coding", "Defence"],
+        githubUrl: "blog-post.html?id=5",
+        mediumUrl: "coming-soon.html",
+        markdownUrl: "blogs/blog5.md",
+        blogTitle: "Escaping the Sandbox: A Dependency Vulnerability RCE in OWASP Juice Shop"
     }
 ];
