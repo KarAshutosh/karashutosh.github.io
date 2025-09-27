@@ -116,8 +116,3 @@ In this case, overlooking incomplete HTML tags allowed full XSS exploitation.
 Security controls must be designed with **browser parsing behavior** in mind, not just what the filter "expects."
 
 A **simple HTML encoding step** (converting `<` to `&lt;`, `>` to `&gt;`, and so on) would have completely prevented this attack in the first place.
-
----
-
-Follow me for more security write-ups:
-[X/Twitter](https://x.com/KAshSecurity) | [YouTube](https://www.youtube.com/@SecurityWithKAsh) | [GitHub](https://github.com/KAshSecurity)

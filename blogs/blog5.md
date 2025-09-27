@@ -105,8 +105,3 @@ This challenge is more than just "hacking for fun." It drives home some uncomfor
 [MasoudAbdaal's GitHub Issue #2715](https://github.com/juice-shop/juice-shop/issues/2715)
 
 [MasoudAbdaal's GitHub profile](https://github.com/MasoudAbdaal)
-
----
-
-Follow me for more write-ups:
-[X/Twitter](https://x.com/KAshSecurity) | [YouTube](https://www.youtube.com/@SecurityWithKAsh) | [GitHub](https://github.com/KAshSecurity)

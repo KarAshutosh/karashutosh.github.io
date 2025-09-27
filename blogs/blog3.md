@@ -213,8 +213,3 @@ Chrome's architecture is explicitly designed to **decouple**: navigation/securit
 - https://developer.chrome.com/blog/inside-browser-part2 "Inside look at modern web browser (part 2)  |  Blog  |  Chrome for Developers"
 - https://developer.chrome.com/blog/inside-browser-part3 "Inside look at modern web browser (part 3)  |  Blog  |  Chrome for Developers"
 - https://developer.chrome.com/blog/inside-browser-part4 "Inside look at modern web browser (part 4)  |  Blog  |  Chrome for Developers"
-
----
-
-Follow me for more write-ups:
-[X/Twitter](https://x.com/KAshSecurity) | [YouTube](https://www.youtube.com/@SecurityWithKAsh) | [GitHub](https://github.com/KAshSecurity)

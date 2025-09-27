@@ -1208,8 +1208,3 @@ sudo oscap xccdf eval --profile <profile_id> --report report.html /usr/share/xml
 - Use **layered security**: combine OS hardening, audit, kernel tweaks, app security, backup, and compliance.
 
 By implementing the measures above, Ubuntu 22.04 LTS servers can be robustly defended against contemporary attacks and misconfigurations, supporting secure production workloads and regulatory compliance.
-
----
-
-Follow me for more security write-ups:
-[X/Twitter](https://x.com/KAshSecurity) | [YouTube](https://www.youtube.com/@SecurityWithKAsh) | [GitHub](https://github.com/KAshSecurity)

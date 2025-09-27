@@ -492,6 +492,33 @@
         });
     });
     </script>
+    <script>
+        // ... existing fetch and render code ...
+
+        fetch(post.markdownUrl)
+            .then(res => res.text())
+            .then(md => {
+                // Render markdown
+                const rendered = marked.parse(md);
+
+                // Append follow-me section
+                const followSection = `
+                    <hr style="margin:2rem 0;">
+                    <div style="text-align:center; margin-top:1.5rem; font-weight:600; color:var(--text-dark);">
+                        Follow me for more write-ups:<br>
+                        <a href="https://x.com/KAshSecurity" target="_blank">X/Twitter</a> | 
+                        <a href="https://www.youtube.com/@SecurityWithKAsh" target="_blank">YouTube</a> | 
+                        <a href="https://github.com/KAshSecurity" target="_blank">GitHub</a>
+                    </div>
+                `;
+
+                document.getElementById('markdownContent').innerHTML = rendered + followSection;
+            })
+            .catch(() => {
+                document.getElementById('markdownContent').innerHTML = "<div style='color:var(--danger-color);text-align:center;'>Failed to load blog post.</div>";
+            });
+    </script>
+
 
 </body>
 </html>

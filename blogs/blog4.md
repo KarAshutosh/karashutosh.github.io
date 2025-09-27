@@ -1773,8 +1773,3 @@ verbose = true
 ---
 
 Src: [Pwning OWASP Juice Shop / Appendix / Challenge solutions](https://pwning.owasp-juice.shop/companion-guide/latest/appendix/solutions.html) as of 1756582151 (2025-08-31) based on the commit 36870cbbdfe7864698e1adf644c7bf772f67ebb7
-
----
-
-Follow me for more write-ups:
-[X/Twitter](https://x.com/KAshSecurity) | [YouTube](https://www.youtube.com/@SecurityWithKAsh) | [GitHub](https://github.com/KAshSecurity)
