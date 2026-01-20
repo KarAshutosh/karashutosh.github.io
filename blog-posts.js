@@ -63,5 +63,18 @@ window.blogPosts = [
         mediumUrl: "coming-soon.html",
         markdownUrl: "blogs/blog5.md",
         blogTitle: "Escaping the Sandbox: A Dependency Vulnerability RCE in OWASP Juice Shop"
+    },
+    {
+        id: 6,
+        title: "CVE Deep Dive - CVE-2025-55182 - React2Shell",
+        excerpt: "An application security engineer's perspective on CVE-2025-55182 (React2Shell), a critical vulnerability in the React that allows remote code execution.",
+        date: "2026-01-21",
+        readTime: "3 min read",
+        severity: "Critical",
+        topics: ["Software", "Application Security", "Secure Coding", "Insecure Deserialization"],
+        githubUrl: "blog-post.html?id=6",
+        mediumUrl: "coming-soon.html",
+        markdownUrl: "blogs/blog6.md",
+        blogTitle: "CVE Deep Dive - CVE-2025-55182 - React2Shell"
     }
 ];
