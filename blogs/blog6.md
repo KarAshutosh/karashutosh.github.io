@@ -96,9 +96,9 @@ function exploitWaku(baseUrl) {
 // exploitNext('http://localhost:3003')
 ```
 
-### React's Custom Symbols
+### React Stuff
 
-Note: `$` and `@` are React notations (syntax patterns and conventions that serve particular functions).
+React notations (syntax patterns and conventions that serve particular functions).
 
 * `$` - React's reference marker
     * Indicates "this is a reference to another object in the payload"
@@ -108,6 +108,14 @@ Note: `$` and `@` are React notations (syntax patterns and conventions that serv
     * Used in React's async component resolution
 * `B` - React's blob marker (when used as `$B`)
     * Indicates binary/blob data reference
+
+Note: `$2:then` points to key `2`'s then method
+
+Internal property names used in React's deserialization logic
+
+*  `_formData`: Stores form data or multipart data being transmitted
+*  `_prefix`: A string prefix that React prepends to identifiers when resolving blob references
+*  `_chunks`: Stores chunks of data being streamed/processed
 
 ### The Payload Structure
 
@@ -199,6 +207,8 @@ This object orchestrates the exploit:
 - This structure tricks React into processing a blob
 
 **`then: '$2:then'`**: References promise handling logic
+
+Note: `resolved_model` means object has been successfully resolved as a complete data model and `'reason': 0,` means no error 
 
 ### The Execution Flow
 
@@ -310,8 +320,14 @@ str.__proto__.__proto__.__proto__; // null
 The fix involves verifying the ownership using `hasOwnProperty` 
 
 - `packages/react-server-dom-parcel/src/client/ReactFlightClientConfigBundlerParcel.js`,
+    - Unsafe: https://github.com/facebook/react/blob/1721e73e149d482a4421d4ea9f76d36a2c79ad02/packages/react-server-dom-parcel/src/client/ReactFlightClientConfigBundlerParcel.js#L81
+    - Safe: https://github.com/facebook/react/blob/e2fd5dc6ad973dd3f220056404d0ae0a8707998d/packages/react-server-dom-parcel/src/client/ReactFlightClientConfigBundlerParcel.js#L84
 - `packages/react-server-dom-turbopack/src/client/ReactFlightClientConfigBundlerTurbopack.js`,
+    - Unsafe: https://github.com/facebook/react/blob/1721e73e149d482a4421d4ea9f76d36a2c79ad02/packages/react-server-dom-turbopack/src/client/ReactFlightClientConfigBundlerTurbopack.js#L248
+    - Safe: https://github.com/facebook/react/blob/e2fd5dc6ad973dd3f220056404d0ae0a8707998d/packages/react-server-dom-turbopack/src/client/ReactFlightClientConfigBundlerTurbopack.js#L251
 - `packages/react-server-dom-webpack/src/client/ReactFlightClientConfigBundlerNode.js`
+    - Unsafe: https://github.com/facebook/react/blob/1721e73e149d482a4421d4ea9f76d36a2c79ad02/packages/react-server-dom-webpack/src/client/ReactFlightClientConfigBundlerNode.js#L161
+    - Safe: https://github.com/facebook/react/blob/e2fd5dc6ad973dd3f220056404d0ae0a8707998d/packages/react-server-dom-webpack/src/client/ReactFlightClientConfigBundlerNode.js#L164
 
 ```jsx
 // unsafe
@@ -331,7 +347,10 @@ if (hasOwnProperty.call(moduleExports, metadata.name)) {
 return (undefined: any);
 ```
 
-And in packages/react-server/src/ReactFlightReplyServer.js
+- packages/react-server/src/ReactFlightReplyServer.js
+    - Unsafe: https://github.com/facebook/react/blob/1721e73e149d482a4421d4ea9f76d36a2c79ad02/packages/react-server/src/ReactFlightReplyServer.js#L617
+    - Safe: https://github.com/facebook/react/blob/e2fd5dc6ad973dd3f220056404d0ae0a8707998d/packages/react-server/src/ReactFlightReplyServer.js#L766
+    - Safe: https://github.com/facebook/react/blob/e2fd5dc6ad973dd3f220056404d0ae0a8707998d/packages/react-server/src/ReactFlightReplyServer.js#L933
 
 ```jsx
 // unsafe 
@@ -447,3 +466,5 @@ function resolve(data, ref) {
 - https://www.geeksforgeeks.org/javascript/understanding-the-prototype-chain-in-javascript/
 - https://javascript.plainenglish.io/prototype-vs-prototype-chain-7766415a75d6
 - https://medium.com/@felipe_bello/proto-and-prototype-chaining-understanding-inheritance-in-javascript-e8f026f99ec3
+- https://github.com/facebook/react/tree/e2fd5dc6ad973dd3f220056404d0ae0a8707998d
+- 
