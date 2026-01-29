@@ -466,4 +466,5 @@ function resolve(data, ref) {
 - https://javascript.plainenglish.io/prototype-vs-prototype-chain-7766415a75d6
 - https://medium.com/@felipe_bello/proto-and-prototype-chaining-understanding-inheritance-in-javascript-e8f026f99ec3
 - https://github.com/facebook/react/tree/e2fd5dc6ad973dd3f220056404d0ae0a8707998d
-- 
+- https://github.com/facebook/react/blob/1721e73e149d482a4421d4ea9f76d36a2c79ad02
+- https://github.com/facebook/react/blob/e2fd5dc6ad973dd3f220056404d0ae0a8707998d
