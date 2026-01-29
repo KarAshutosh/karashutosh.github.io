@@ -372,19 +372,18 @@ Note: this [PR](https://github.com/facebook/react/pull/35277) also tries to sync
 **Threat Modeling Key Questions:**
 
 1. Does the application deserialize user-controlled data?
-2. Are there trust boundaries between serialization and deserialization?
-3. Can attackers control object structures in serialized payloads?
-4. Does deserialization access object properties without validation?
-5. Are prototype chain traversals possible during deserialization?
+2. Can attackers control object structures in serialized payloads?
+3. Does deserialization access object properties without validation?
+4. Are prototype chain traversals possible during deserialization?
 
 **Code Review Focus Areas**:
 
 1. Custom deserialization logic
-2. Object property traversal loops
-3. Dynamic property access (`obj[key]`)
-4. Reference resolution mechanisms
-5. Prototype chain interactions
-6. Constructor access patterns
+2. Object property traversal loops: Code that iterates through object properties, often following a path or chain of property names.
+3. Dynamic property access (`obj[key]`): Accessing object properties using bracket notation with variable keys, rather than dot notation with fixed keys.
+4. Reference resolution mechanisms: Systems that resolve symbolic references (like $1, $4, $3:constructor:constructor) to actual objects or values.
+5. Prototype chain interactions: JavaScript's inheritance mechanism where objects inherit properties from their prototype.
+6. Constructor access patterns: Ways to access constructor functions, which can create new instances or execute code.
 
 ### **Code Patterns to Review**
 
