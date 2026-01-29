@@ -96,6 +96,19 @@ function exploitWaku(baseUrl) {
 // exploitNext('http://localhost:3003')
 ```
 
+### React's Custom Symbols
+
+Note: `$` and `@` are React notations (syntax patterns and conventions that serve particular functions).
+
+* `$` - React's reference marker
+    * Indicates "this is a reference to another object in the payload"
+    * Format invented by React team for their serialization needs
+* `@` - React's promise/async marker
+    * Indicates "this is a promise reference"
+    * Used in React's async component resolution
+* `B` - React's blob marker (when used as `$B`)
+    * Indicates binary/blob data reference
+
 ### The Payload Structure
 
 The PoC constructs a malicious payload object with carefully crafted references that exploit React's deserialization logic:
