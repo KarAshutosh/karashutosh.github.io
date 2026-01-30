@@ -100,11 +100,40 @@ function exploitWaku(baseUrl) {
 // exploitNext('http://localhost:3003')
 ```
 
-### Vulnerable Code Snippet
+### Vulnerable Code Snippets
 
+https://github.com/facebook/react/blob/1721e73e149d482a4421d4ea9f76d36a2c79ad02/packages/react-server/src/ReactFlightReplyServer.js#L518-L540
+https://github.com/facebook/react/blob/1721e73e149d482a4421d4ea9f76d36a2c79ad02/packages/react-server/src/ReactFlightReplyServer.js#L446-L501
 https://github.com/facebook/react/blob/1721e73e149d482a4421d4ea9f76d36a2c79ad02/packages/react-server/src/ReactFlightReplyServer.js#L595-L638
 
 ```jsx
+function getChunk(response: Response, id: number): SomeChunk<any> {
+  const chunks = response._chunks;
+  let chunk = chunks.get(id);
+  if (!chunk) {
+    const prefix = response._prefix;
+    const key = prefix + id;
+    // Check if we have this field in the backing store already.
+    const backingEntry = response._formData.get(key);
+    if (backingEntry != null) {
+      // We assume that this is a string entry for now.
+      chunk = createResolvedModelChunk(response, (backingEntry: any), id);
+    } 
+    // more code ...
+    chunks.set(id, chunk);
+  }
+  return chunk;
+}
+
+function initializeModelChunk<T>(chunk: ResolvedModelChunk<T>): void {
+  initializingChunk = chunk;
+  const resolvedModel = chunk.value;
+  try {
+    const rawModel = JSON.parse(resolvedModel);
+  // more code ...
+  }
+}
+
 function getOutlinedModel<T>(
   response: Response,
   reference: string,
@@ -130,7 +159,7 @@ function getOutlinedModel<T>(
       return map(response, value);
     case PENDING:
     case BLOCKED:
-    // more code .. 
+    // more code ...
   }
 }
 ```
