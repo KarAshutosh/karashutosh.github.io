@@ -102,9 +102,9 @@ function exploitWaku(baseUrl) {
 
 ### Vulnerable Code Snippets
 
-https://github.com/facebook/react/blob/1721e73e149d482a4421d4ea9f76d36a2c79ad02/packages/react-server/src/ReactFlightReplyServer.js#L518-L540
-https://github.com/facebook/react/blob/1721e73e149d482a4421d4ea9f76d36a2c79ad02/packages/react-server/src/ReactFlightReplyServer.js#L446-L501
-https://github.com/facebook/react/blob/1721e73e149d482a4421d4ea9f76d36a2c79ad02/packages/react-server/src/ReactFlightReplyServer.js#L595-L638
+* https://github.com/facebook/react/blob/1721e73e149d482a4421d4ea9f76d36a2c79ad02/packages/react-server/src/ReactFlightReplyServer.js#L518-L540
+* https://github.com/facebook/react/blob/1721e73e149d482a4421d4ea9f76d36a2c79ad02/packages/react-server/src/ReactFlightReplyServer.js#L446-L501
+* https://github.com/facebook/react/blob/1721e73e149d482a4421d4ea9f76d36a2c79ad02/packages/react-server/src/ReactFlightReplyServer.js#L595-L638
 
 ```jsx
 function getChunk(response: Response, id: number): SomeChunk<any> {
@@ -352,9 +352,9 @@ const rawModel = JSON.parse(resolvedModel);
 
 ```javascript
 // React encounters blob reference "$B3"
-reference = "$B3"
-// Strip $B prefix
-blobId = "3"
+reference = "$B3" // B means a binary or a blob
+// React's blob handling code strips the "$B" prefix
+Id = "3"
 id = parseInt('3', 16) = 3
 ```
 
