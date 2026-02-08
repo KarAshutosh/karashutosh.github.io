@@ -76,5 +76,18 @@ window.blogPosts = [
         mediumUrl: "coming-soon.html",
         markdownUrl: "blogs/blog6.md",
         blogTitle: "CVE Deep Dive - CVE-2025-55182 - React2Shell"
+    },
+    {
+        id: 7,
+        title: "I Built an Entire Operating System Just to Say 'Hello World'",
+        excerpt: "A Tale of Over-Engineering, AI Assistance, and Questionable Life Choices",
+        date: "2026-02-09",
+        readTime: "3 min read",
+        severity: "Informational",
+        topics: ["Software"],
+        githubUrl: "blog-post.html?id=7",
+        mediumUrl: "coming-soon.html",
+        markdownUrl: "blogs/blog7.md",
+        blogTitle: "I Built an Entire Operating System Just to Say 'Hello World'"
     }
 ];
